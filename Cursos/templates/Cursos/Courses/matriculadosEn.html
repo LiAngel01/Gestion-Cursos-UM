@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+    {% include "Cursos/header.html" %}
+
+    <style>
+      #id_titulo{
+        font-size: large;
+      }
+      i{
+        font-size: larger;
+      }
+    </style>
+</head>
+<body class="bg-dark text-light">
+ <div class="mx-5" ><a href="{% url 'courses' %}" class="btn btn-secondary float-end btn-sm" >Ir atras</a>
+   <p id="id_titulo">Estudiantes matriculados en el curso de:   <i>{{curso}}</i></p>
+   <span>Total de estudiantes: {{cant}}</span>
+
+
+</div>
+
+<div class="row">
+  <div class="col text-center">
+    <a href="{% url 'listadoA' curso.id %}" class="btn btn-primary btn-sm">Lista Aprobados</a>
+  </div>
+  <div class="col  text-center">
+    <a href="{% url 'listadoNA' curso.id %}" class="btn btn-secondary btn-sm">Lista No Aprobados</a>
+  </div>
+</div>
+
+
+    
+<table class="table table-dark table-striped table-hover table-bordered  container mt-4">
+  <tr>
+    <th style="width: 340px;" ><b>Estudiante</b></th><th class="text-center" style="width: 150px;" >Nivel Escolar</th><th class="text-center" ><b>Evaluaciones</b></th> <th class="text-center" ><b>Nota Final</b></th>{% if request.user.username == "admin" or request.user.username == "OyP" or request.user.username == "Colectivo" %}
+    <th></th>{% endif %}
+  </tr>
+  {% for p in entity %}
+  <tr>
+    <td>{{p.Student}} {{ p.Student.seclastName }} </td> <td class="text-center" >{{p.Student.nivelEscolar}}</td>
+    
+    <td class="">
+      <table class="" >
+        <tr>
+          {% for i in nota %}{% if i.Student == p.Student  %}
+          <td class="">
+        
+       <span class=" mx-2">{{i.tval}}: <b>{{i.note}} </b>pts  </span>    
+       </td>
+        {% endif %}{% endfor %}
+        </tr>
+      </table>
+    </td>
+
+       <td style="width: 120px;" class="text-center">
+        {% for j in notaf %}
+          {% if j.Student == p.Student %}
+            {% if j.fn > 2 %}
+            {{j.fn}} pts
+            {% else %}
+             -
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+       </td>
+       {% if request.user.username == "admin" or request.user.username == "Colectivo" %}
+         
+       
+       <td class="text-center" ><a class="btn btn-primary btn-sm" href="{% url 'studentDetails' p.Student.id %}"> Evaluaciones<i class="icon ion-edit mx-1 float-end" style="font-size: 16px;"></i></a></td>
+ {% endif %}
+
+ {% if request.user.username == "OyP" %}
+ <td class="text-center" ><a class="btn btn-primary btn-sm" href="{% url 'studentDetails' p.Student.id %}"> Ver detalles</a></td>
+ {% endif %}
+
+</tr>
+       {% endfor %} 
+</table>
+
+
+
+
+
+
+
+</body>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

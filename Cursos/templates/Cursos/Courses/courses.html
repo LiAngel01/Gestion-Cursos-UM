@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+ 
+    <style>
+        h3{color: rgb(253, 253, 253);}
+        p{ color: rgb(255, 255, 255);}
+
+        #close,#edit,#lista,#ficha,#view {
+          position: relative; /* Asegúrate de que el elemento padre tenga esta propiedad */
+      }
+
+        #view:hover::after{
+          content: "Ver detalles";
+          position: absolute;
+          background-color: cadetblue;
+          color: aliceblue;
+          padding: 3px;
+          border-radius: 5px;
+          left: 50%; /* Centra horizontalmente respecto al elemento */
+          top: -30px; /* Ajusta la posición vertical según el tamaño del cartel */
+          transform: translateX(-50%); /* Ajusta para centrarlo justo encima del elemento */
+          white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
+        #ficha:hover::after{
+          content: "Generar Ficha";
+          position: absolute;
+          background-color: cadetblue;
+          color: aliceblue;
+          padding: 3px;
+          border-radius: 5px;
+          left: 50%; /* Centra horizontalmente respecto al elemento */
+          top: -30px; /* Ajusta la posición vertical según el tamaño del cartel */
+          transform: translateX(-50%); /* Ajusta para centrarlo justo encima del elemento */
+          white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
+        #lista:hover::after{
+          content: "Ver matriculados ";
+          position: absolute;
+          background-color: cadetblue;
+          color: aliceblue;
+          padding: 3px;
+          border-radius: 5px;
+          left: 50%; /* Centra horizontalmente respecto al elemento */
+          top: -30px; /* Ajusta la posición vertical según el tamaño del cartel */
+          transform: translateX(-50%); /* Ajusta para centrarlo justo encima del elemento */
+          white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
+        #edit:hover::after{
+          content: "Modificar";
+          position: absolute;
+          background-color: cadetblue;
+          color: aliceblue;
+          padding: 3px;
+          border-radius: 5px;
+          left: 50%; /* Centra horizontalmente respecto al elemento */
+          top: -30px; /* Ajusta la posición vertical según el tamaño del cartel */
+          transform: translateX(-50%); /* Ajusta para centrarlo justo encima del elemento */
+          white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
+        
+      
+      #close:hover::after {
+          content: "Cerrar Curso";
+          position: absolute;
+          background-color: cadetblue;
+          color: aliceblue;
+          padding: 3px;
+          border-radius: 5px;
+          left: 0%; /* Centra horizontalmente respecto al elemento */
+          top: -30px; /* Ajusta la posición vertical según el tamaño del cartel */
+          transform: translateX(-50%); /* Ajusta para centrarlo justo encima del elemento */
+          white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+      }
+      
+      
+
+    </style>
+</head>
+<body class=" text-light " style="background: url( {% static 'Unidad/img/carousel img/portfolio-2.jpg' %}) center / cover no-repeat;background-position:center center;background-attachment:fixed; ">
+    {% include "Cursos/header.html" %}
+    
+
+    <section class="container" >
+        
+     
+         
+<div class="row">
+
+        <div class="col-md-3 my-2 " >
+        <form action="" method="get" class="  input-group">
+        <input type="search" name="search" id="search_input" class="form-control bg-dark text-light "  {% if query %}
+        value="{{query}}"
+        {% endif %} placeholder="Buscar...">
+        <button class="btn btn-primary" type="submit"><i class="icon ion-ios-search-strong" style="font-size: 16px;"></i></button>
+        </form>
+        </div >
+
+        <div class="col-md-3  my-2">
+            {% if user.username == 'OyP' or user.username == 'admin' %}
+            <a href="{% url 'newCourse' %}" class="btn btn-primary " title="AGREGAR CURSO" >Agregar Curso</a>
+            {% endif %}
+            
+           </div>
+           <div class="col-md-3">
+
+           </div>
+
+         <div class="col-md-3 my-2" >
+            <a href="{% url 'showClosesCourses' %}" class="btn btn-secondary btn-sm " >Ir a registro histórico de Cursos</a>
+         </div>  
+
+</div>
+
+  
+  </section>
+   
+    <section>
+      <div class="container py-4 py-xl-5">
+        <div class="row mb-2">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2>GESTIONAR CURSOS</h2>
+                <p>TIPOS DE CURSOS:</p>
+            </div>
+        </div>
+        <div>
+            <ul class="nav nav-pills d-flex justify-content-center" role="tablist">
+                <li class="nav-item " role="presentation"><a class="nav-link active text-light" role="tab" data-bs-toggle="pill" href="#tab-1">FORMACIÓN OFICIALES</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-light" role="tab" data-bs-toggle="pill" href="#tab-2">ESPECIALISTAS FUNDAMENTALES</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-light" role="tab" data-bs-toggle="pill" href="#tab-3">CONCENTRADO</a></li>
+            </ul>
+            <div class="tab-content pt-5">
+                <div class="tab-pane active" role="tabpanel" id="tab-1">
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive" data-aos="fade-left" id="tabla1">
+                                <table class="table table-hover table-striped table-dark table-bordered">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th>Cursos</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
+                                            <th>Cant Matriculados</th>
+                                            <th class="text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for p in entity %}
+                                      {% if p.isActive and  p.kind == "Formación Oficiales" %}
+
+                                        <tr>
+                                          <td> {{p.name}} </td> <td> {{p.start_date}} </td> <td> {{ p.end_date }} </td> <td class="text-center">{{p.cantM}}</td>
+                                          <td style="width: 300.094px;">
+
+
+                                            
+
+                                            
+
+                                            <a id="lista" class=" btn"  href="{% url 'matriculadosEn' p.id  %}" ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-check" style="font-size: 23px;color: rgb(36,255,0);">
+                                              <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"></path>
+                                            </svg></a>
+
+
+                                           
+                            
+
+                                           
+
+
+                                        
+
+                                          <a id="ficha"  href="{% url 'fichaCourse' p.id  %}" class=" btn "><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-file-text text-white" style="font-size: 21px;">
+                                            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"></path>
+                                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
+                                        </svg></a>            
+
+
+                                        <button id="view" class="  btn show-more-info" data-id="{{ p.id }}" onclick="writeToScreen('{{ p.name }}', '{{ p.description }}','{{ p.start_date }}','{{p.end_date}}','{{p.cantM}}' )"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-eye text-info" style="font-size: 22px;">
+                                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                                         </svg></button>
+
+
+
+                                         {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                               <a id="edit" class="btn" href="{% url 'modifyCourse' p.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square text-success" style="font-size: 26px;">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                            </svg></a>
+                                            {% endif %}
+
+
+                                         {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                         <a id="close"  href="{% url 'closeCourse' p.id %}" class=" btn " ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-key text-danger" style="font-size: 25px;">
+                                           <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"></path>
+                                           <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                                       </svg></a>
+                                         {% endif %}
+                                           
+                                           
+                                        </td>
+                                        </tr>
+                                      {% endif %}  
+                                      {% endfor %}
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="tab-2">
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive" data-aos="fade-left" id="tabla2">
+                                <table class="table table-hover table-striped table-dark table-bordered">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th>Curso</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
+                                            <th>Cant Matriculados</th>
+                                            <th class="text-center" >Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for p in entity %}
+                                      {% if p.isActive and  p.kind == "Especialistas Fundamentales" %}
+
+                                        <tr  >
+                                          <td> {{p.name}} </td> <td> {{p.start_date}} </td> <td> {{ p.end_date }} </td> <td class="text-center">{{p.cantM}}</td>
+                                          <td style="width: 300.094px;" class="text-center" >
+
+                                           
+                                           
+
+                                            
+
+                                            <a id="lista" class="btn"  href="{% url 'matriculadosEn' p.id  %}" ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-check" style="font-size: 23px;color: rgb(36,255,0);">
+                                              <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"></path>
+                                            </svg></a>
+
+
+                                           
+                            
+
+                                           
+
+
+                                        
+
+                                          <a id="ficha"  href="{% url 'fichaCourse' p.id  %}" class=" btn "><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-file-text text-white" style="font-size: 21px;">
+                                            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"></path>
+                                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
+                                        </svg></a>            
+
+
+                                        <button id="view" class=" btn show-more-info" data-id="{{ p.id }}" onclick="writeToScreen('{{ p.name }}', '{{ p.description }}','{{ p.start_date }}','{{p.end_date}}','{{p.cantM}}' )"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-eye text-info" style="font-size: 22px;">
+                                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                                         </svg></button>
+
+
+                                         {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                               <a id="edit" class="btn " href="{% url 'modifyCourse' p.id %}" ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square text-success" style="font-size: 26px;">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                            </svg></a>
+                                            {% endif %}
+
+                                        
+                                         {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                         <a id="close"  href="{% url 'closeCourse' p.id %}" class=" btn " ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-key text-danger" style="font-size: 25px;">
+                                           <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"></path>
+                                           <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                                       </svg></a>
+                                         {% endif %}
+                                       
+                                           
+                                        </td>
+                                        </tr>
+                                      {% endif %}  
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="tab-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive" data-aos="fade-left" id="tabla3">
+                                <table class="table table-hover table-striped table-dark table-bordered">
+                                   
+                                    <thead>
+                                        <tr>
+                                            <th>Cursos</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
+                                            <th>Cant Matriculados</th>
+                                            <th class="text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for p in entity %}
+                                      {% if p.isActive and  p.kind == "Concentrados" %}
+
+                                        <tr>
+                                          <td> {{p.name}} </td> <td> {{p.start_date}} </td> <td> {{ p.end_date }} </td> <td class="text-center">{{p.cantM}}</td>
+                                          <td style="width: 300.094px;" class="text-center">
+
+
+                                            
+
+                                            <a id="lista" class=" btn"  href="{% url 'matriculadosEn' p.id  %}" ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list-check" style="font-size: 23px;color: rgb(36,255,0);">
+                                              <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"></path>
+                                            </svg></a>
+
+
+                                           
+                            
+
+                                           
+
+
+                                        
+
+                                          <a id="ficha"  href="{% url 'fichaCourse' p.id  %}" class=" btn "><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-file-text text-white" style="font-size: 21px;">
+                                            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"></path>
+                                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
+                                        </svg></a>            
+
+
+                                        <button id="view" class="  btn show-more-info" data-id="{{ p.id }}" onclick="writeToScreen('{{ p.name }}', '{{ p.description }}','{{ p.start_date }}','{{p.end_date}}','{{p.cantM}}' )"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-eye text-info" style="font-size: 22px;">
+                                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                                         </svg></button>
+
+            
+                                         
+
+                                            {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                               <a id="edit" class="btn " href="{% url 'modifyCourse' p.id %}" ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square text-success" style="font-size: 26px;">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                            </svg></a>
+                                            {% endif %}
+                                           
+
+
+                                            {% if request.user.username == "OyP" or request.user.username == "admin" %}
+                                                      <a id="close"  href="{% url 'closeCourse' p.id %}" class=" btn " ><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-key text-danger" style="font-size: 25px;">
+                                                        <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"></path>
+                                                        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                                                    </svg></a>
+                                                      {% endif %}
+
+                                           
+                                        </td>
+                                        </tr>
+                                      {% endif %}  
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+         </div>
+         <div class="container">
+          <label id="screen" class="text-light " style="width: 100%; margin-top:20px !important"></label>
+         </div>
+        
+    
+    </section>
+
+
+
+
+
+
+  <script>
+    //addEventListener("load",writeToScreen)
+    function writeToScreen(name, description,start_date, end_date,cantM) {
+        // Obtener el elemento donde se escribirá la información
+        const screenElement = document.getElementById('screen');
+      
+        screenElement.innerHTML = '';
+        // Actualizar el contenido HTML del elemento de la pantalla
+        screenElement.innerHTML += `
+          <label class="entity-info form-control bg-dark "  >
+            <h3><b> <i> ${name}</i> </b></h3>
+            <hr/>
+            <p> <b> <i> Fecha de Inicio: </i> </b> ${start_date}</p>
+            <p> <b> <i> Fecha de Fin: </i> </b> ${end_date}</p>
+            <p> <b> <i> Cantidad de matriculados: </i> </b> ${cantM}</p>
+            <p> <b><i>Descripción: </i> </b>  ${description}  </p>
+            
+          </label>
+        `;
+      }
+      
+  </script>
+
+</body>
+
+  
+<!-- <script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    <script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

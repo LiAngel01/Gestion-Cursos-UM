@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <style>
+    label{
+        margin: auto
+
+    }
+    input{
+        margin: auto;
+    }
+   .card{
+        width: 100% !important;
+        margin: auto !important;
+        margin-top: 100px !important;
+    }
+    textarea{
+        width: 90%;
+        min-height: min-content;
+        height: 50px;
+        resize: vertical;
+        max-height: min-content;
+        padding:5px;
+        background-color: #212529;  
+        color: aliceblue;
+    }
+   </style>
+</head>
+{% include "Cursos/header.html" %}
+<body class="text-center bg-dark text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                
+                        
+                        
+
+                        <hr>
+                        <form action="" method="post" class="form-control bg-dark text-light    ">
+                            <h2>Valoracion de:</h2>
+
+                        {{entity}} {{entity.seclastName}}
+                            {% csrf_token %}
+                            {{form}}
+
+                            <input type="reset" value="Cancelar" class="btn btn-secondary btn-sm">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Entrar">
+
+                        </form>
+
+                 
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

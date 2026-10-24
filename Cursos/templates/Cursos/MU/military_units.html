@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/css/Features-Image-images.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/css/Navbar-Right-Links-Dark-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+</head>
+<body class="text-light" style="background: url( {% static 'Unidad/img/carousel img/portfolio-2.jpg' %}) center / cover no-repeat; ">
+    {% include "Cursos/header.html " %}
+
+    <div class="container  " >
+        <h3>Unidades Militares Registradas</h3>
+        <div class="row featurette" >
+            <div class="col-md-3" >
+                <form action="" method="get" class=" my-4  input-group">
+                <input type="search" name="search" id="search_input" class="form-control bg-dark text-light"  placeholder="Buscar">
+               
+                <button class="btn btn-primary" type="submit"><i class="icon ion-ios-search-strong" style="font-size: 16px;"></i></button>
+                
+               
+        
+                </form>
+                </div > 
+                <div class="col-md-3 my-4">
+                    <a href="{% url 'newMU' %}" class="btn btn-primary ">Agregar Unidad Militar</a>
+                 </div>
+            <div class="col-md-7 order-md-2">
+                
+                <table class="table table-hover table-striped table-dark" >
+                    <tr>
+                        <th>Número</th> <th>Región</th><th>Opciones</th>
+                    </tr>
+                    {% for p in entity %}
+                      <tr>
+                        <td>{{p.number}}</td>
+                        <td>
+                            {% if p.provincia %}
+                              {{p.provincia}}
+                             {% else %} 
+                               <div class="mx-4">--</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'modifyMU' p.id %}" class="btn btn-primary btn-sm">Modificar MU</a>
+                            <a href="{% url 'deleteMU' p.id %}" class="btn btn-primary btn-sm">Eliminar MU</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                </table>
+                {% include "Cursos/paginator.html" %}
+                </div>
+                <div class="col-md-5  order-md-2 " >
+                    <div>
+                       
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>`
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

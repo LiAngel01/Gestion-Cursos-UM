@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document - No Aprobados</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <style>
+      body,.container {
+            
+            
+        width:800px !important;
+        margin:5px auto;
+        
+        
+
+    }
+    </style>
+</head>
+
+<body  >
+  <p>
+    Listado de Estudiantes suspensos en el Curso: {{curso}}
+  </p>
+<table class="table table-sm container">
+  <th>Nombre</th>
+    {% for p in lista %}
+      {% for n in notas %}
+        {% if n.Student == p.Student and n.fn < 3 %}
+           <tr>
+            <td>
+              <div>
+                {{p.Student}} {{p.Student.seclastName}} 
+            
+              </div>
+            </td>
+           </tr>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </table>
+
+</body>
+</html>

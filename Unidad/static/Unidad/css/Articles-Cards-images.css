@@ -1,0 +1,11 @@
+.fit-cover {
+  object-fit: cover;
+}
+
+footer {
+  /*background: #030202;*/
+  /*display: block;*/
+  bottom: 0;
+  width: 100%;
+}
+

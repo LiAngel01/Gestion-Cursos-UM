@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+</head>
+<body class="container mx-4 mt-4" >
+ 
+    <div class="row align-items-center container">
+        <div class="col-md-6 col-6 col-sm-4">
+          <div class="d-flex flex-column justify-content-center h-100">
+            <div>
+              <b>Nombre(s):</b> {{student.firstName}}
+            </div>
+            <div>
+             <b>Apellidos:</b>  {{student.lastName}} {{ student.seclastName }}
+            </div>
+            <div>
+              <b>CI:</b>   {{student.CI}}
+            </div>
+            <div>
+              <b>Nivel Escolar:</b>   {{student.nivelEscolar}}
+            </div>
+            <div>
+              <b> UM de Procedencia:</b>  {{student.MU}}
+            </div>
+            <div>
+              <b>Telefono:</b> 
+               {% if student.telefono %}
+                 {{student.telefono}}
+                 {% else %}
+                 Sin Número
+               {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-6 col-sm-4 d-flex  justify-content-end align-items-center">
+          {% if student.picture %}
+          <img src="{{ student.picture.url }}" onerror="this.onerror=null;this.src='{% static 'Unidad/img/avatars/avatar1.jpeg' %}'" alt="Foto de {{ student }}" class="bd-placeholder-img" width="200" height="200" preserveAspectRatio="xMidYMid slice">
+          {% else %}
+          <img src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" alt="Foto no disponible" class="bd-placeholder-img rounded-circle" width="200" height="200">
+          {% endif %}
+        </div>
+      </div>
+      
+      
+      
+ <!--segunda filaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+ <div class="row container" >
+    <div>
+        <h2 class="featurette-heading fw-normal lh-1"> <span class="text-muted">Resumen del estudiante:</span></h2>
+      {% if student.valoracion  %}
+      <p class="lead">{{student.valoracion}}</p>
+      {% else %}
+      <p class="lead">No se ha realizado una valoracion sobre el estudiante.</p>
+      {% endif %}
+    </div>
+    <div class="" >
+     
+     {% for i in entity  %}
+     {% if i.Student == student %}
+
+     <label for="" class="form-control p-auto mb-3">
+       
+      
+       
+       
+       
+       <h4>{{ i.Course }} </h4>
+       {% for nf in notafr %}
+          {% if nf.Course == i.Course %}
+          <div><h6><b>Nota Final: 
+            {{nf.final_note }}</b></h6>
+           </div>
+          {% endif %}
+        {% endfor %}
+       <hr>
+       
+     
+       {% for n in notas  %}
+       
+         
+       
+           {% if n.Student.id == student.id and n.Course.id == i.Course.id  %}
+           {% if n.note %}
+           {% if not n.note == 0 %}
+           <h6 class=""></h6>            
+           
+               
+             
+        
+           
+           <div class="d-flex justify-content-between "> <h6>Nota {% if n.tval %}
+             {{n.tval}}
+            {% endif %} :  {{n.note}}</h6>
+            
+           
+           </div>
+           {% if n.valoracion %}
+               {{n.valoracion}}
+               {% else %}
+               No se ha realizado un resumen de la evaluacion 
+               {% endif %}</a>
+           <hr>
+               
+            {% endif %}
+           {% endif %}
+           
+
+              
+        
+        
+               
+       
+
+           {% endif %}
+       {% endfor %} 
+     </label>
+      
+     {% endif %}
+     
+     
+    
+   {% endfor %} 
+  
+    </div>
+ </div>
+  
+</body>
+</html>
+
+
+
+<!--   <h3>Ficha del estudiante</h3>
+    <img src="{{ student.picture.url }}" onerror="this.onerror=null;this.src='{% static 'Unidad/img/avatars/avatar1.jpeg' %}'" alt="Foto de {{ student }}" class="bd-placeholder-img m-auto mx-2 rounded-circle" width="200" height="200" preserveAspectRatio="xMidYMid slice">
+    <div class="mx-2">{{student}} {{ student.seclastName}} </div>
+</div>
+<div class="col-md-7">
+  <label for="firstName" class="form-label">CI</label>
+  <label for="" class="form-control p-auto"> {{student.CI}}</label>
+
+</div>
+
+
+<div class="col-md-7">
+   <label for="firstName" class="form-label">Nombre</label>
+   <label for="" class="form-control p-auto"> {{student.firstName}}</label>
+  
+ </div>
+
+<div class="col-md-7">
+   <label for="lastName" class="form-label">Apellídos</label>
+   <label for="" class="form-control p-auto"> {{student.lastName}}  {{student.seclastName}}</label>
+  </div> 
+  
+  
+  <div class="col-md-7">
+   <label for="lastName" class="form-label">UM de Proveniencia</label>
+   <label for="" class="form-control p-auto"> {{student.MU}}  </label>
+  </div>
+  <div class="col-md-7">
+   <label for="firstName" class="form-label">Telefono</label>
+   <label for="" class="form-control p-auto">{% if student.telefono %}
+     {{student.telefono}}
+     {% else %}
+      Sin Número
+     {% endif %}
+   </label>-->

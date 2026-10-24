@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <script src="{% static 'Cursos/js/html2canvas.min.js' %}"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            z-index: 1 !important;
+        }
+
+        #content {
+            width: 1500px;
+            min-height: 620px; /* Asegúrate de que tenga un mínimo */
+            margin: 0 auto; /* Centra el contenido */
+            position: relative; /* Cambia a relative si es necesario */
+        }
+
+        .centered-image {
+            position: absolute; 
+            z-index: 0 !important; 
+        }
+
+        span {
+            font-size: 16px;
+        }
+        p{
+          font-size: 16px;
+        }
+
+        h1 {
+            font-size: 60px;
+        }
+    </style>
+</head>
+
+<body class="text-center" id="content">
+    <img src="{% static 'Unidad/img/carousel img/bg-callout.jpg' %}" class="mx-auto" width="1200px" height="800px" style="z-index: -1;">
+
+    <div style="margin-top: -592px;">
+        <i>
+            <h1>Certificado</h1>
+            <p>a: <u>{{matricula.Student}}  {{matricula.Student.seclastName}}</u></p>
+            <p>Por haber concluido con éxito el:</p>
+
+            {% if matricula.Course.kind == "Concentrados" %}
+            <p><u>Curso de Concentrado de {{matricula.Course}}</u></p>
+            {% endif %}
+
+            {% if matricula.Course.kind == "Especialistas Fundamentales" %}
+            <p><u>Curso de Especialistas Fundamentales de {{matricula.Course}}</u></p>
+            {% endif %}
+
+            {% if matricula.Course.kind == "Formación Oficiales" %}
+            <p><u>Curso de Formación Oficiales de {{matricula.Course}}</u></p>
+            {% endif %}
+
+            <p>Especialidad de Comunicaciones.</p>
+            {% if matricula.primerExpediente == True %}
+            <p>Resultando ser el Primer Expediente</p>
+            {% endif %}
+            <p>Dado en la Habana a los {{hoy}} días del mes {{mes}} del año {{year}}</p>
+        </i>
+    </div>
+
+    {% if qr_img_path %}
+    <img src="{{ qr_img_path }}" alt="Código QR" width="150px" height="150px">
+    {% endif %}
+
+    <div id="pie_firma" class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <pre><span>
+ ________________________________
+Jefe Colectivo Profesores
+Cp Dariel Peña Martínez
+            </span></pre>
+        </div>
+        <div class="col-3">
+            <pre><span>
+________________________________
+Jefe Unidad Militar 
+My José Javier Martínez León </span></pre>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(takeScreenshot, 1000); // Espera un segundo antes de tomar la captura
+    });
+
+    function takeScreenshot() {
+        html2canvas(document.getElementById("content")).then(function(canvas) {
+            var imgData = canvas.toDataURL("image/png");
+            var link = document.createElement("a");
+            link.download = "Certificado_de_{{matricula.Student}}_en_curso_{{matricula.Course}}.png";
+            link.href = imgData;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+</script>
+
+</html>

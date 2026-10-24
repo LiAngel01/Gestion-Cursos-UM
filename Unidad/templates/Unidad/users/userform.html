@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new User</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'Unidad/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Articles-Cards-images.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Features-Large-Icons-icons.css' %}">
+    <link rel="stylesheet" href="{% static  'Unidad/css/Simple-Slider-swiper-bundle.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider.css' %}">
+
+    <style>
+        input,select,textarea{
+                
+                display: block;
+                width: 100%;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #ffffff;
+                background-color: #212529;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              }
+        .form-control{
+            width: 90%;
+        }
+        label{
+            margin-left: 0px;
+        }
+    </style>
+
+</head>
+
+<nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav" style="text-shadow: 0px 0px 20px rgb(1,1,1);">
+  <div class="container">
+      <div class="sidebar-brand-icon rotate-n-15"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-broadcast-pin" style="font-size: 55px;padding-right: 9px;color: var(--swiper-theme-color);text-shadow: 0px 0px 20px var(--bs-black);padding-bottom: 0px;margin-bottom: 9px;">
+              <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"></path>
+          </svg></div><a class="navbar-brand" href="{% url 'index' %}">Inicio</a><button data-bs-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+              
+              {% for u in usuarios %}
+              {% if u.username == request.user.username %}
+            {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin' or request.user.username == 'admin' or user.username == 'OyP' or user.username == 'Colectivo'  %}
+            
+              <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+              {% endif %}
+                {% endif %}
+              {% endfor %}
+
+
+              {% for u in usuarios %}
+                {% if u.username == request.user.username %}
+              {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin'  or user.username == 'OyP' or u.rol == 'OyP'  %}
+              
+               <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+              
+              {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% if user.username == 'admin' %}
+              <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+              <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+              {% endif %}
+
+      </div>
+  </div>
+  {% if request.user.is_authenticated %}
+  
+  <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      
+      <input type="submit" class="btn border text-light mx-auto" value="Cerrar sesión: @{{request.user.username}}">
+      </form>
+   {% else %}
+  <a href="{% url 'login' %}" class="btn border mx-auto" >Iniciar sesión</a>
+  {% endif %}
+</nav>
+
+<body class="bg-dark text-light" style="margin-top:100px ;" >
+<div class="container" >
+    <div class="row ">
+    <div class="col-md-6">
+    <a href="{% url 'list_users' %}" class="btn btn-secondary">Volver Atrás</a>
+    <form action="" method="post" class="form-control bg-dark px-5 text-light mt-4 mx-auto">
+        {% csrf_token %}
+        {{form}}
+       <!--  <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+       <input type="text" value="{{ fecha_nacimiento }}"  name="fecha_nacimiento"  >
+
+       <label for="postgrados">Postgrado</label>
+       <div onclick="replicarInput()" class="btn btn-success float-end" style="padding:0; width:20px;"><i class="icon ion-plus" style="font-size: 16px;"></i></div>
+       <div class="postgrado"><input class="" id="postgrado" type="text" data-aos="zoom-in-left" data-aos-duration="900" placeholder="Postgrado" name="postgrado" >   </div>
+-->
+
+      <div class="mt-2 text-center">
+        <button type="reset" class="btn btn-secondary" >Limpiar</button>
+        <button type="submit" class="btn btn-primary" name="save_button">Guardar</button>
+      </div>
+
+    </form>
+</div>
+<div class="col-md-6">
+    <div class="mt-5" >
+ 
+  <label for="name" class="mt-2">Introducir postgrado</label>
+     <form action="" class="input-group   bg-dark" method="post">
+      
+        {% csrf_token %}
+       
+        
+       <div class=" d-flex"> <button type="submit" name="agregar_post"  class="btn btn-primary " >Agregar</button><input type="text" name="nombre_post"  class="w-100" id="">
+         </div>
+        
+     </form>
+     <div> Postgrado(s):</div>
+    {% for p in posts %}
+      {% if p.user.CI == user.CI %}
+      <ul class="mx-auto mt-2">
+        <li >
+         <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" name="delete_post" value="{{ p.id }}" class="btn btn-danger btn-sm" >Eliminar</button> {{p.nombre}} 
+         </form>
+        </li>
+      </ul>
+         {% endif %}
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>    
+</body>
+
+
+
+<script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+<script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+
+<script>
+    function replicarInput() {
+        // Obtener el elemento padre del input
+        const contenedor = document.querySelector('.postgrado');
+      
+        // Crear el nuevo input
+        const nuevoInputText = document.createElement('input');
+        
+        nuevoInputText.type = 'text';
+        nuevoInputText.dataset.aos = 'zoom-in-left';
+        nuevoInputText.dataset.aosDuration = '900';
+        nuevoInputText.placeholder = 'Postgrado';
+      
+        // Obtener el número más alto del atributo "name" existente
+        const inputsExistentes = contenedor.querySelectorAll('input[name^="postgrado"]');
+        let numeroMasAlto = 0;
+        if (inputsExistentes.length > 0) {
+          const ultimoInput = inputsExistentes[inputsExistentes.length - 1];
+          const ultimoNumero = parseInt(ultimoInput.name.replace('postgrado', ''));
+          numeroMasAlto = isNaN(ultimoNumero) ? 0 : ultimoNumero;
+        }
+      
+        // Establecer el nuevo nombre del input
+        nuevoInputText.name = `postgrado${numeroMasAlto + 1}`;
+        
+      
+        // Agregar el nuevo input debajo del existente
+        contenedor.appendChild(nuevoInputText);
+      }
+      
+</script>
+
+
+<script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    <script src="{% static 'Unidad/js/grayscale.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider.js' %}"></script>
+
+</html>

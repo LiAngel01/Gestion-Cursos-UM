@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+</head>
+<body class="text-light" style="background: url( {% static 'Unidad/img/carousel img/portfolio-2.jpg' %}) center / cover no-repeat; ">
+    {% include "Cursos/header.html" %}
+    <div class="container">
+        <div class="float-end mx-2">
+            <P class="lead">Filtrar por cursos</P>
+        <form action="" method="get" class="mt-2  input-group">
+            
+            <select name="course_id" id="course_id" class="form-control bg-dark text-light">
+                <option value="">Todos los cursos</option>
+                {% for course in courses %}
+                <option value="{{ course.id }}" {% if course_id == course.id|stringformat:"i" %}selected{% endif %}>{{ course.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit" >Filtrar <!--<i class="icon ion-ios-search-strong" style="font-size: 16px;"></i>--></button>
+        </form>
+        </div>
+        <h3>Gestión de Estudiantes</h3>
+       
+        <div class="row" >
+
+        <div class="col-md-3 " >
+        <form action="" method="get" class=" my-2  input-group">
+        <input type="search" name="search" id="search_input" class="form-control bg-dark text-light" {% if query %}
+        value="{{query}}"
+        {% endif %}
+        placeholder="Buscar">
+        <button class="btn btn-primary" type="submit"><i class="icon ion-ios-search-strong" style="font-size: 16px;"></i></button>
+       
+
+        </form>
+        
+        </div > 
+        <div class="col-md-3 my-2">
+            {% if user.username == "OyP" or user.username == "admin" %}
+            <a href="{% url 'newStudent' %}" class="btn btn-primary ">Agregar Estudiante</a>
+            {% endif %}
+         </div> 
+           
+        </div>
+       
+    <table class="table table-hover table-striped table-dark">
+        <tr>
+           <th>CI</th> <th>Grado</th> <th>Nombre y Apellídos</th>  <th >UM Procedencia</th> <th>UM Menor</th> <th >Curso</th> <th>Telefono</th> <th>Opciones</th> 
+        </tr>
+        {% for p in entity %}
+          <tr>
+            <td>{{ p.CI }} </td>
+             <td> {{p.grado}} </td>
+             <td>{{ p.firstName |capfirst }} {{ p.lastName }} {{p.seclastName}}</td>
+             <td class=""> <b>{{p.MU.number}} 
+                {% if p.MU.provincia %}
+                  - {{p.MU.provincia}}
+             {% endif %} </b></td> <td>
+                {% if p.MUI %}
+                {{p.MUI.number}}
+                {% else %}
+                -
+                {% endif %}
+             </td>
+             <td class="" >{% for i in mat  %}
+               {% if i.Student.id == p.id %}
+                 
+                       {{ i.Course }}
+                       
+               {% endif %}
+             {% endfor %}</td>
+             <td>
+            {{  p.telefono }}
+             </td>
+             
+             <td>
+                
+    <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Menú</button>
+        <div class="dropdown-menu dropdown-menu-dark">
+            {% if user.username == "OyP" or user.username == "admin" %}
+              <a class="dropdown-item" href="{% url 'deleteStudent' p.id %}">Eliminar <i class="icon ion-android-delete mx-3" style="font-size: 17px;"></i></a>
+           
+              <a class="dropdown-item" href="{% url 'modifyStudent' p.id %}">Modificar <i class="icon ion-edit mx-2" style="font-size: 15px;"></i></a>
+            
+              
+              {% if not p.matriculado %}
+              <a class="dropdown-item" href="{% url 'matricular' p.id %}">Matricular<i class="icon ion-play mx-4" style="font-size: 16px;"></i></a>
+               
+              {% endif %}
+               
+              
+                
+           
+           
+            
+            {% endif %}
+            <a class="dropdown-item" href="{% url 'studentDetails' p.id %}">Ver más<i class="icon ion-play mx-4" style="font-size: 16px;"></i></a>
+            </div>
+    </div>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+ {% include "Cursos/paginator.html" %}
+ <a href="{% url 'studentsNotmat' %}" class="btn btn-secondary float-end">Estudiantes no matriculados</a>
+</div>    
+
+  
+    <script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+    
+</body>
+</html>

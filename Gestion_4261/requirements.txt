@@ -1,0 +1,5 @@
+django
+OpenCV-python 
+pillow
+numpy
+qrcode[pil]

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Aprobados</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}"><style>
+      body,.container {
+            
+            
+        width:800px !important;
+        margin:5px auto;
+        
+        
+
+    }
+    </style>
+</head>
+
+<body  >
+  <p>
+    Listado de Estudiantes Aprobados en el Curso: {{curso}}
+  </p>
+<table class="table table-sm container">
+  <th>Nombre</th> <th class="text-center" >Nota</th>
+    {% for p in lista %}
+      {% for n in notas %}
+        {% if n.Student == p.Student and n.fn > 2 %}
+           <tr>
+            <td>
+              <div>
+                {{p.Student}} {{p.Student.seclastName}} 
+            
+              </div>
+            </td>
+            <td class="text-center" >{{ n.fn}}</td>
+           </tr>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </table>
+
+</body>
+</html>

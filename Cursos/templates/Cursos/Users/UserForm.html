@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/css/Navbar-Right-Links-Dark-icons.css' %}">
+    <style>
+        form{
+            width: 300px !important;
+            border-radius: 10px !important;
+        }
+        .helptext{
+            display: none;
+        }
+        input{
+            width: 80%;
+            margin-bottom: 10px;
+            padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #ffffff;
+        background-color: #212529;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .form-control,input:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          }
+          #id_rol{
+            height: 30px;
+            background-color: #212529;
+            color: aliceblue;
+          }
+
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <form action="" method="post" class="form-control bg-dark text-light text-center mx-auto my-5 p-3 ">
+        {% csrf_token %}
+        {{form}}
+        <button type="reset" class="btn btn-secondary btn-sm">Cancelar</button>
+        <button type="submit" class="btn btn-primary btn-sm m-3">Guardar</button>
+    </form>
+</body>
+
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

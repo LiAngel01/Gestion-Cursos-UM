@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <style>
+        
+       .form{
+        width: 60% !important ; 
+        
+       }
+        
+    #id_firstName,#id_lastName,#id_seclastName,#id_telefono,#id_MU,#id_CI,#id_Course,#id_tomo,#id_folio,#id_nivelEscolar{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+        margin-top: 0px;
+        margin-bottom: 3px;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #212529;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        color: aliceblue;
+      }
+      
+      .form-control,input:focus {
+        color: #495057;
+        background-color: #212529;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
+      }
+      .errorList{
+        display:none;
+      }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    
+    <h3>Modificar Estudiante</h3>
+    <div class="row">
+    <div class="col-12 col-md-6 offset-md-3 mt-5" >
+        <form class="form form-control text-center mx-auto text-light" action="" method="post" enctype="multipart/form-data" >
+    
+            {% csrf_token %}
+            {{form}}
+    
+    
+            <a href="{% url 'showStudents' %}" class=" btn btn-secondary btn-sm ">Ir a atras</a> 
+            <input type="submit" class="btn btn-sm btn-primary my-2"  value="Guardar">
+    
+        </form></div></div>
+</body>
+
+</html>

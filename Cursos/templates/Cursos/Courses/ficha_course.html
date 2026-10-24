@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <script src="{% static 'Cursos/js/html2canvas.min.js' %}"></script>
+
+    <style>
+        body,.container {
+            
+            
+            width:800px !important;
+            margin:5px auto;
+            
+            
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="content" style="width: 1000px;">
+
+        <div class="w-100" >
+           <div><h4> {{curso}} </h4> </div>
+           <div><b> Fecha de Inicio: </b> {{curso.start_date}}</div>
+           <div><b>Fecha de Cierre: </b>  {{curso.end_date}}</div>
+           <div> <b>Total de estudiantes Matriculados: </b>  {{ curso.cantM }}</div>
+          <!-- <div> <b>Datos generales del curso: </b> {{curso.description}}</div>-->
+
+           <div>
+            <h6>Estudiantes:</h6>
+            <div>
+            
+
+            <table class="table table-sm container">
+                <tr>
+                   <th>No.</th> <th>Grado,Nombre y apellidos</th> <th>CI</th> <th> Nota</th> <th> UM </th> <th>Telefono</th>
+                </tr>
+                
+          {% for p in matricula %}
+              <tr><td> {{ forloop.counter }} </td> <td> {% if p.Student.grado %}
+                {{p.Student.grado}}
+                {% else %}
+                
+                {% endif %}
+                
+                {{p.Student}} {{p.Student.seclastName}}</td> <td>{{p.Student.CI}}</td>
+
+                <td> 
+
+                  {% for n in nf %}
+
+                                      {% if curso == n.Course and p.Student == n.Student %}
+                                      {% if n.fn == 2 %}
+                                      -
+                                      {% else %}
+                                      {{n.fn}} pts
+                                      {% endif %}
+                                      
+                                      {% endif %}
+
+                  {% endfor %}
+
+           </td>
+
+
+              <td>{{ p.Student.MU.number  }} </td> <td>{{ p.Student.telefono }}</td> </div></tr>
+
+            {% endfor %}
+            
+            </table>
+
+           </div>
+        </div>
+             
+    </div>
+
+
+</body>
+
+<script>
+    addEventListener("load",takeScreenshot())
+    function takeScreenshot() {
+      html2canvas(document.body).then(function(canvas) {
+        // Convierte el canvas a una imagen en formato PNG
+        var imgData = canvas.toDataURL("image/png");
+
+        // Crea un elemento de enlace para descargar la imagen
+        var link = document.createElement("a");
+        link.download = "Ficha_del_Curso_{{curso}}.png";
+        link.href = imgData;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+  </script>
+
+</html>

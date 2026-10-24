@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Unidad/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/carousel.css' %}">
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/aos.min.css">
+    <link rel="stylesheet" href="assets/css/carousel.css">
+
+ <style>
+    html{
+        width: 100%;
+    }
+ </style>   
+</head>
+<nav  class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav" style="text-shadow: 0px 10px 20px rgb(0, 0, 0);">
+    <div class="container " >
+        <div class="sidebar-brand-icon rotate-n-15"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-broadcast-pin" style="font-size: 55px;padding-right: 9px;color: var(--swiper-theme-color);text-shadow: 0px 0px 20px var(--bs-black);padding-bottom: 0px;margin-bottom: 9px;">
+                <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"></path>
+            </svg></div><a class="navbar-brand" href="{% url 'index' %}">Inicio</a><button data-bs-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'index' %}#about" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Historia</a></li>
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'index' %}#download" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Misión</a></li>
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'eventos' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Novedades</a></li>
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'index' %}#colectivo" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Plantilla</a></li>
+                {% for u in usuarios %}
+                {% if u.username == request.user.username %}
+              {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin' or request.user.username == 'admin' or user.username == 'OyP' or user.username == 'Colectivo'  %}
+              
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+                {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+
+                {% for u in usuarios %}
+                  {% if u.username == request.user.username %}
+                {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin'  or user.username == 'OyP' or u.rol == 'OyP'  %}
+                
+                 <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+                
+                {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if user.username == 'admin' %}
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+                <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+                {% endif %}
+
+                
+
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        
+        <input type="submit" class="btn border text-light mx-auto" value="Cerrar sesión: @{{user.username}}">
+        </form>
+     {% else %}
+    <a href="{% url 'login' %}" class="btn border mx-auto" >Iniciar sesión</a>
+    {% endif %}
+</nav>
+<body id="page-top" class="mt-0 p-0" >
+
+   
+    
+
+    <section id="portfolio" class="content-section mt-0 container" style="margin-top: 0px !important;padding-top: 0px;">
+        <div class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" id="carousel-1">
+            <div class="carousel-inner">
+                <div class="carousel-item active"><img class="w-100 d-block" src="{% static 'Unidad/img/carousel img/IMG_20240123_114429.jpg' %}" alt="Slide Image">
+                    <div class="container">
+                        <div class="text-start carousel-caption">
+                            <h1 class="text-white" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Eventos actualizados&nbsp;&nbsp;</h1>
+                            <p class="text-white" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Esté al día con las próximas fechas a celebrar y actividades a realizar por nuestra unidad y el Estado Mayor del Ejército Occidental .</p>
+                            <p><a class="btn btn-primary btn-lg" role="button" href="#">Saber más</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item"><img class="w-100 d-block" src="{% static 'Unidad/img/carousel img/Screenshot_2024-06-03-23-15-36-448_com.android.chrome.jpg' %}" alt="Slide Image">
+                    <div class="container">
+                        <div class="text-start carousel-caption">
+                            <h1>Example headline.</h1>
+                            <p>Some representative placeholder content for the first slide of the carousel.</p>
+                            <p><a class="btn btn-primary btn-lg" role="button" href="#">Sign up today</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item"><img class="w-100 d-block" src="{% static 'Unidad/img/carousel img/IMG_20240123_114429.jpg' %}" alt="Slide Image">
+                    <div class="container">
+                        <div class="text-start carousel-caption">
+                            <h1>Example headline.</h1>
+                            <p>Some representative placeholder content for the first slide of the carousel.</p>
+                            <p><a class="btn btn-primary btn-lg" role="button" href="#">Sign up today</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
+            </ol>
+        </div>
+        <div class="container">
+            <div class="content-section-heading text-center">
+                <h2 class="text-secondary mb-0">Novedades</h2>
+                <h2 class="mb-5"></h2>
+            </div>
+           
+        <div class="container marketing">
+            
+           <h2><span class="text-muted">Cursos Abiertos:</span></h2>
+           <hr class="featurette-divider">
+            {% for p in cursos %}
+            <div class="row featurette mt-5">
+                <div class="col-md-7" data-aos="slide-right">
+                    <h2 class="fw-normal featurette-heading lh-1" style="margin-top: 20px !important;">{{ p.name }} </h2>
+                    <p class="lead"> Fecha de Inicio: {{ p.start_date }} <br> Fecha de Cierre: {{ p.end_date }}</p>
+                    <p > </p>
+                </div>
+                <div class="col-md-5">
+                    <div data-aos="slide-left" class="lead" class=" mt-5" style="margin-top:40px !important ;" > {{p.description}} </div>
+                   <!-- <div data-aos="slide-left" class="w-100"><img class="img-fluid border rounded mx-auto" loading="auto" width="319" height="213" src="assets/img/portfolio-1.jpg" style="box-shadow: 13px 13px 20px var(--bs-black);margin-top: 85px;margin-right: 0px;margin-left: 0px;padding: 0px;"></div>
+                --></div>
+            </div>
+            <hr class="featurette-divider">
+            {% endfor %}
+           
+        </div>
+        
+    </section>
+
+    <script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    <script src="{% static 'Unidad/js/grayscale.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider.js' %}"></script>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/aos.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/stylish-portfolio.js"></script>
+</body>
+
+</html>

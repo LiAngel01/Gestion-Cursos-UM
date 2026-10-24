@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+    <style>
+        table{
+            width:600px !important;
+        }
+    </style>
+</head>
+{% include "Cursos/header.html" %}
+<body class="bg-dark text-light">
+
+    <section class="container row">
+     <div class="col-md-7 order-md-1">
+    <div>
+        <a href="{% url 'NewUser' %}" class="btn btn-primary my-3">Crear Usuario</a>
+    </div>
+
+    <table class="table table-sm table-hover table-dark table-striped border ">
+        <tr>
+            <th>Nombre de Usuario</th> <th>Rol</th> <th>Acciones</th>
+        </tr>
+    {% for e in entity %}
+    <tr>
+     <td> {{e}}</td><td>{{e.rol}}</td><td> 
+        <button class=" btn btn-primary btn-sm" data-id="{{ e.id }}" onclick="writeToScreen('{{ e}}', '{{e.last_login }}','{{e.rol }}')">Ver más</button>
+        <a href="{% url 'modifyUser' e.id %}" class="btn btn-primary btn-sm">Modificar</a>
+        <a href="{% url 'deleteUser' e.id %}" class="btn btn-secondary btn-sm">Eliminar</a>
+    </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+<div class="col-md-5 order-md-2">
+<div>
+    <label id="screen" class="text-light" style="width: 100%; margin-top:37px"></label>
+</div>
+</div>
+
+</section>
+
+</body>
+
+
+
+<script>
+    //addEventListener("load",writeToScreen)
+    function writeToScreen(username, last_login,rol) {
+        // Obtener el elemento donde se escribirá la información
+        const screenElement = document.getElementById('screen');
+      
+        screenElement.innerHTML = '';
+        // Actualizar el contenido HTML del elemento de la pantalla
+        screenElement.innerHTML += `
+          <label class="entity-info form-control bg-dark text-light"  >
+            <h3><b> <i> ${username}</i> </b></h3>
+            <hr/>
+            <p> <b> <i> Último acceso: </i> </b> ${last_login}</p>
+            <p> <b><i>Rol: </i> </b>  ${rol}  </p>
+            
+          </label>
+        `;
+      }
+      
+  </script>
+  <script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

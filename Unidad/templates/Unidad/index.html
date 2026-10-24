@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="es-es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>UM-4261</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Unidad/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Articles-Cards-images.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Features-Large-Icons-icons.css' %}">
+    <link rel="stylesheet" href="{% static  'Unidad/css/Simple-Slider-swiper-bundle.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider.css' %}">
+
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carrois+Gothic&amp;display=swap">
+   
+   
+    <style>
+
+        html,section{
+            width: 100% !important;
+        }
+
+        #fa_about{
+            font-size: 40px;
+        }
+        
+        p,h3{
+            font-weight:bold;
+            text-shadow: 0px 0px 20px rgb(0,0,0) !important;
+            color: rgb(255,255,255);
+          
+          }
+          p{
+font-size:25px !important;
+          }
+          h3{
+            font-size: 50px !important;
+          }
+    </style>
+    
+</head>
+
+<body class="text-break w-100" style="width:100% !important" id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="77">
+    <nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav" style="text-shadow: 0px 0px 20px rgb(1,1,1);">
+        <div class="container">
+            <div class="sidebar-brand-icon rotate-n-15"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-broadcast-pin" style="font-size: 55px;padding-right: 9px;color: var(--swiper-theme-color);text-shadow: 0px 0px 20px var(--bs-black);padding-bottom: 0px;margin-bottom: 9px;">
+                    <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"></path>
+                </svg></div><a class="navbar-brand" href="{% url 'index' %}">Inicio</a><button data-bs-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="#about" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Historia</a></li>
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="#download" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Misión</a></li>
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'eventos' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Novedades</a></li>
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="#colectivo" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Plantilla</a></li>
+                    {% for u in usuarios %}
+                    {% if u.username == request.user.username %}
+                  {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin' or request.user.username == 'admin' or user.username == 'OyP' or user.username == 'Colectivo'  %}
+                  
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+                    {% endif %}
+                      {% endif %}
+                    {% endfor %}
+
+
+                    {% for u in usuarios %}
+                      {% if u.username == request.user.username %}
+                    {% if user.is_authenticated and user.username == 'jum4261' or u.rol == 'Admin'  or user.username == 'OyP' or u.rol == 'OyP'  %}
+                    
+                     <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+                     {% endif %}
+                      {% endif %}
+                    {% endfor %}
+
+                   
+
+                    {% if user.username == 'admin' %}
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'UserList' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">Usuarios</a></li>
+                    <li class="nav-item nav-link" data-bss-hover-animate="jello"><a class="nav-link" href="{% url 'postlog' %}" style="text-shadow: 0px 0px 20px rgb(0,0,0);">SARECx</a></li>
+                    {% endif %}
+ 
+                    
+
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            
+            <input type="submit" class="btn border text-light mx-auto" value="Cerrar sesión: @{{user.username}}">
+            </form>
+         {% else %}
+        <a href="{% url 'login' %}" class="btn border mx-auto" >Iniciar sesión</a>
+        {% endif %}
+    </nav>
+    <header class="masthead"  style="background: url({% static 'Unidad/img/carousel img/bg-masthead.jpg' %}) center / cover no-repeat; width:100% !important " >
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 mx-auto">
+                        <h1 class="fw-light jello animated brand-heading" style="text-align: center;font-size: 70px;text-shadow: 0px 0px 20px rgb(0,0,0);">"Unidad Militar 4261"</h1>
+                        <p class="intro-text"style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);font-size:large;">Bienvenido al sitio web de la U/M 4261, Unidad de Comunicaciones del</p>
+                        <div class="intro-text" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);font-size:large;"> <p>Estado Mayor del Ejército Occidental</p></div>
+                        <a class="btn btn-link jello animated infinite btn-circle border" role="button" href="#about"><i  id="fa_about" class="fa fa-angle-double-down animated " style="color: aliceblue;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="text-center text-light content-section p-auto d-flex justify-content-center align-items-center "  id="about" style="background: url( {% static 'Unidad/img/carousel img/IMG_20240703_193848.jpg' %}) center / cover no-repeat; height:100%; ">
+        <div class="">
+            <div class="row">
+                <div class="col-lg-10 col-md-6 my-auto  mx-auto" data-aos="fade-left" data-aos-duration="900" style="text-shadow: 0px 0px 20px rgb(0,0,0);">
+                    <h2>Histórico</h2>
+                    <p class="font-size-lg-4 font-size-md-4 font-size-xs-2" style="color: #ffffff;background: rgba(255,255,255,0);width:auto;height:auto;font-size:large;">La Unidad Militar 4261 fue fundada el 18 de diciembre de 1970 en las afueras del reparto de parcelación Moderna. Cito en calle 100 y carretera de ojo de agua Provincia Ciudad de la Habana quedando estructurado de la siguiente forma la Jefatura, Plana Mayor, Compañía de comunicaciones de 3 pelotones, una compañía de cables y líneas, compañía de centro de comunicaciones, una escuadra de servicio y una escuadra de reparaciones y mantenimientos.</p>
+                    <p style="color: #ffffff;background: rgba(255,255,255,0);width:auto;height:auto;font-size:large">Como principales misiones tiene garantizar la seguridad y defensa de la ubicación permanente de la unidad militar, además de garantizar de forma oportuna y eficaz las comunicaciones al Estado Mayor del Ejército Occidental con el mando Superior y las unidades subordinadas.
+
+                    </p>
+                    <a class="btn btn-primary btn-lg btn-default" role="button" href="{% url 'historico' %}" target="_parent">saber más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center download-section content-section  p-auto d-flex justify-content-center align-items-center" id="download" style="background-image: url({% static 'Unidad/img/carousel img/IMG_20240123_114429.jpg'%})  ; height: 99% ">
+        <div class="container">
+            <div class="col-lg-10 col-md-10 mx-auto">
+                <h1 style="text-shadow: 0px 0px 20px rgb(0,0,0);">Misión</h1>
+                <p class="" data-aos="flip-up" data-aos-duration="1550" style="font-size: 21px;" style="font-weight: bold;">Las principales misiones y funciones asignadas de TP son: Asegurar la preparación del personal según los programas y las indicaciones metodológicas de organización, Desarrollar los cursos de formación de suboficiales técnicos de la especialidad. Desarrollar los concentrados de preparación de los especialistas menores empleando para ello los medios mas complejos de la Especialidad (Carros de Mando, Estaciones Mediana Potencia y Radioenlaces). Garantizar el mantenimiento y conservación del material de guerra de la Unidad Militar, Asegurar el despliegue y correcto funcionamiento de los Centros de Comunicaciones de la Segunda y Tercera red de puestos de mando. Asegurar el restablecimiento de la capacidad técnica de los medios de comunicaciones (reparaciones ligeras) con el órgano de aseguramiento técnico.</p>
+            </div>
+        </div>
+    </section>
+    <section  class="text-center text-light content-section"  style="background: url( {% static 'Unidad/img/carousel img/IMG_20240703_193848.jpg' %}) center / cover no-repeat;">
+       <hr  style="color: transparent;" >
+        <div  class="container "  style="height: 100%;">
+            
+            <div  class="row">
+                <div  class=" text-center mx-auto col-md-6 col-xl-8 " style="height: 100%;">
+
+                    
+                   
+                    <div    class="" data-aos="fade-right" style="text-shadow: 0px 0px 14px rgb(0,0,0);">
+                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center me-4 d-inline-block bs-icon" style="background: rgb(27,132,255);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clock" style="font-size: 57px;">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
+                            </svg></div>
+                        <div>
+                            <h4  class="fs-1 text-light text-center" id="horario">Horario del día</h4>
+                            <p  class="text-break text-light" style="font-weight: bold;">Sepa nuestro plan de orden diaria, horarios tanto días hábiles como fines de semana.</p><a href="{% url 'ordendeldia' %}" class="btn border bg-dark text-light" style="color: var(--bs-blue);">Sepa más<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+                    
+                    
+                    {% if user.is_authenticated  %} 
+                    <hr style="color: rgb(0,0,0);">
+                    {% endif %}
+
+                    <div   class=" " data-aos="fade-left" style="text-shadow: 0px 0px 14px rgb(0,0,0);">
+                       
+                        {% if user.is_authenticated  %} 
+                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center me-4 d-inline-block bs-icon" style="background: rgb(27,132,255);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-bookmark-fill" style="font-size: 50px;">
+                                <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"></path>
+                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"></path>
+                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"></path>
+                            </svg></div>
+                            
+                        <div>
+                            <h4 class="fs-1 text-light text-center">PCDC</h4>
+                            <p class="text-break " style="font-weight: bold;">Conozca el Plan de Puesta en Completa Disposición Combativa de la UM</p><a href="{% url 'pcdc' %}" class="btn border bg-dark text-light" style="color: var(--bs-blue);">Sepa más&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                </svg></a>
+                        </div>
+                        
+                    </div>
+                    {% endif %}
+                    
+                    <hr style="color: rgb(0,0,0);">
+                    <div class="" data-aos="fade-right" style="text-shadow: 0px 0px 14px rgb(0,0,0);">
+                        
+                        <div class=" bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center me-4 d-inline-block bs-icon" style="background: rgb(27,132,255);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-bookmark-fill" style="font-size: 50px;">
+                                <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"></path>
+                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"></path>
+                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"></path>
+                            </svg></div>
+
+                        <div>
+                            <h4 class="fs-1 text-light text-center">Galería</h4>
+                            <p class="text-break" style="font-weight: bold;">Conozca nuestro espacio de fotografías</p><a class="btn border bg-dark text-light" href="{% url 'galeria' %}" style="color: var(--bs-blue);">Sepa más&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                                </svg></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        
+        </div>
+    </section>
+    <section id="colectivo" class="p-auto"  style="background: url( {% static 'Unidad/img/carousel img/IMG_20240123_114429.jpg' %})no-repeat;background-size: cover;text-shadow:5px rgb(0,0,0); center / cover no-repeat;">
+        <div class="container py-4 py-xl-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class=""><strong>Estructura-plantilla</strong></h2>
+                    <p>Nuestra unidad está integrada por un excelente equipo de Oficiales&nbsp;</p>
+                    {% for u in usuarios %}
+                    {% if u.username == request.user.username %}
+                   
+                  {% if user.is_authenticated and u.username == 'jum42611' or u.rol == 'Admin' or request.user.username == 'admin' or u.username == 'OyP'  %}
+                    <a href="{% url 'list_users' %}" class="btn btn-secondary">Actualizar Plantilla</a>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor  %}
+                   {% if user.username == 'admin' %}
+                   <a href="{% url 'list_users' %}" class="btn btn-secondary">Actualizar Plantilla</a>
+                   
+                   {% endif %}
+                   
+                </div>
+            </div>
+
+
+<!-- modal del jum4261-->
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-modelo-ficha">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha Jefe U/M 4261</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == 'Jefe U/M' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel }} </div> 
+                                                       
+                                                     
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                                         
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+ 
+
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+            <!--ficha 2do jefe U/M-->
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-ficha-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha 2do Jefe U/M 4261</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == '2do Jefe U/M' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                       {% if p.postgrado %}
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--ficha Ingeniero Principal-->
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-ficha-2">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha Ingeniero Principal</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == 'Ingeniero Principal' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                       {% if p.postgrado %}
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+             <!--ficha Politico-->
+             <div class="modal fade" role="dialog" tabindex="-1" id="modal-ficha-3">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha Politico</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == 'Político' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                       {% if p.postgrado %}
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+             <!--ficha Tecnico Tanques y transporte-->
+             <div class="modal fade" role="dialog" tabindex="-1" id="modal-ficha-4">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha Téc Tanques y Trans </h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == 'Técnico Tanques y Transporte' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                       {% if p.postgrado %}
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+             <!--ficha OyP-->
+             <div class="modal fade" role="dialog" tabindex="-1" id="modal-ficha-5">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light ">
+                        <div class="modal-header bg-dark text-light ">
+                            <h4 class="modal-title bg-dark text-light">Ficha OyP</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                            <div>
+                                {% for p in entity %}
+                                                {% if p.cargo == 'OyP' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <div class="px-3">
+                                                        <p class="mb-0 ">{{p.cargo}}: {{p.grado}} {{p}} {{p.apellido2}} </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                          <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                       {% if p.postgrado %}
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.telefono %}
+                                                       <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.correo %}
+                                                       <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                       {% endif %}
+
+                                                       {% if p.direccion %}
+                                                       <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                       {% endif %}
+                                                       <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                                       <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                        {% if p.CI == j.user.CI %}
+                                                        <div>{{ j.nombre }}</div>
+                                                        <hr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                          </div>
+
+                                                {% endif %}
+                                                {% endfor %}
+                            </div>
+                            <div class="modal-footer bg-dark text-ligth"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+
+            <section class="text-light "   >
+                <div class="container" >
+                    <div class=" "  >
+                        <div class="modal fade modal-dark"  role="dialog" tabindex="-1" id="modal-jefatura">
+                            <div class="modal-dialog  modal-xl modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header bg-dark">
+                                        <h4 class="modal-title bg-dark">JEFATURA</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container py-4 py-xl-5">
+                                            <div>
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Jefe U/M' %}
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-modelo-ficha"  data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                        </svg></button>
+                                                    <div class="px-3">
+                                                        <p class="mb-0">{{p.cargo}}: {{p.grado}} {{p.nombre}}  </p>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <div class="row g-0 row-cols-md-5  justify-content-center align-items-center text-center mx-auto  "  >
+                                                {% for p in entity %}
+                                                {% if p.cargo == '2do Jefe U/M' %}
+                                                <div class="col mt-1 m-auto">
+                                                    <div>
+                                                        <div class=" text-center d-flex flex-column justify-content-center align-items-center " data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-ficha-1" data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                                </svg></button>
+                                                            <div class="px-1">
+                                                            <p class="mb-0">{{p.cargo}}: </p>
+                                                            <p class="mb-0"> {{p.grado}}</p>
+                                                            <p class="mb-0"> {{p.nombre}} </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Ingeniero Principal' %}
+                                                <div class="col mt-1 m-auto">
+                                                    <div class="text-center d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-ficha-2" data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                            </svg></button>
+                                                        <div class="px-1">
+                                                            <p class="mb-0">{{p.cargo}}: </p>
+                                                            <p class="mb-0"> {{p.grado}}</p>
+                                                            <p class="mb-0"> {{p.nombre}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Político' %}
+                                                <div class="col mt-1  m-auto">
+                                                    <div class="text-center d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-ficha-3" data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                            </svg></button>
+                                                        <div class="px-1 my-auto">
+                                                            <p class="mb-0">{{p.cargo}}: </p>
+                                                            <p class="mb-0"> {{p.grado}}</p>
+                                                            <p class="mb-0"> {{p.nombre}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Técnico Tanques y Transporte' %}
+                                                <div class="col mt-1  m-auto">
+                                                    <div class="text-center d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-ficha-4" data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                            </svg></button>
+                                                        <div class="px-1">
+                                                            <p class="mb-0">{{p.cargo}}: </p>
+                                                            <p class="mb-0"> {{p.grado}}</p>
+                                                            <p class="mb-0"> {{p.nombre}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'OyP' %}
+                                                <div class="col mt-1  m-auto">
+                                                    <div class="text-center d-flex flex-column justify-content-center align-items-center" data-aos="zoom-in-up"><button class="btn btn-primary text-start border-0 shadow-lg bs-icon-circle bs-icon" type="button" data-bs-target="#modal-ficha-5" data-bs-toggle="modal" style="width: 50px;height: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star" style="font-size: 74px;color: rgb(244,245,245);">
+                                                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"></path>
+                                                            </svg></button>
+                                                        <div class="px-1">
+                                                            <p class="mb-0">{{p.cargo}}:  </p>
+                                                            <p class="mb-0"> {{p.grado}}  </p>
+                                                            <p class="mb-0">{{p.nombre}}  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Atrás</button></div>
+                                </div>
+                            </div>
+<!-- ###########################################################################################################################-->
+                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-modelo-ficha">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Ficha Modelo</h4><button class="btn-close text-bg-danger" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container"><img class="rounded-circle" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" width="160" height="160" style="width: 160px;margin: 0px;padding: 0px;transform: perspective(0px) translate(140px);"></div>
+                                            <div></div><label class="form-label" style="transform: translate(88px);">Nombre:</label><input type="text" style="transform: translate(88px);">
+                                        </div>
+                                        <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal" data-bs-target="#modal-jefatura" data-bs-toggle="modal">Cerrar</button></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                        <div   class="text-center text-light" data-aos="zoom-in-up">
+                        <button class=" mx-auto bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon" data-bss-hover-animate="bounce" type="button" style="border-style: none;border-color: var(--swiper-theme-color);" data-bs-target="#modal-jefatura" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-star-fill" style="font-size: 30px;">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                        </svg></button>
+                        <div class="px-3">
+                            <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">JEFATURA</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+            
+    <div class=" text-light pe-4 row gy-4 row-cols-2 row-cols-md-4 ">
+        <div class="col">
+                    <section class="">
+                        <div class="container">
+                            <div class="text-center ">
+                                <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-dark text-light">
+                                                <h4 class="modal-title bg-dark text-light">Centro Comones 1</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body bg-dark text-light" >
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Jefe Centro 1' %}
+                                                <div class="text-center mx-auto " >
+                                                    <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                                                    <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                                                    <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                                                    <div>
+                                                       
+                                                     </div> 
+                                                     <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                                     <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                                  {% if p.postgrado %}
+                                                                  <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.telefono %}
+                                                                  <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.correo %}
+                                                                  <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.direccion %}
+                                                                  <div class="text-start" > <b>Direccion: </b> {{ p.direccion }} </div> 
+                                                                  {% endif %}
+                                                                  <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+
+                                                                  <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                                    {% if p.CI == j.user.CI %}
+                                                                    <div>{{ j.nombre }}</div>
+                                                                    <hr>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                    </div>
+                                                     </div>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                                {% for p in entity %}
+                                                {% if p.cargo == 'Ingeniero Principal CC1' %}
+                                                <div class="text-center mx-auto " >
+                                                    <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                                                    <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                                                    <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                                                    <div>
+                                                       
+                                                     </div> 
+                                                     <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                                     <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                                                  {% if p.postgrado %}
+                                                                  <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.telefono %}
+                                                                  <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.correo %}
+                                                                  <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                                                  {% endif %}
+           
+                                                                  {% if p.direccion %}
+                                                                  <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                                                  {% endif %}
+                                                                  <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+
+                                                                  <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                                    {% if p.CI == j.user.CI %}
+                                                                    <div>{{ j.nombre }}</div>
+                                                                    <hr>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                    </div>
+                                                     </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                
+                                                    </div>
+                                            <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">cerrar</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                    <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: var(--bs-cyan);border-style: none;" type="button"  data-bs-target="#modal-2" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people" style="font-size: 30px;">
+                                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+                                    </svg></button>
+                                    <div class="px-3">
+                                        <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">CENTRO COMONES 1</p>
+                                    </div> 
+                            </div>
+                        </div>
+                    </section>
+                    
+                       
+                            <div>
+                                <div class="row row-cols-md-2">
+                                    <div class="col" data-aos="zoom-in-up">
+
+                                        
+                                                <div class="text-center ">
+                                                   
+                                                    <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                        <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: var(--bs-cyan);border-style: none;" type="button"  data-bs-target="#modal-6" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-geo" style="font-size: 30px;">
+                                                            <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"></path>
+                                                        </svg></button>
+                                                        <div class="">
+                                                            <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                                                SUBCENTRO COMONES
+                                                            </p>
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center ">
+                                                   
+                                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                                    <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: var(--bs-cyan);border-style: none;" type="button"  data-bs-target="#modal-7" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-server" style="font-size: 30px;">
+                                                        <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"></path>
+                                                        <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"></path>
+                                                        <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z"></path>
+                                                    </svg></button>
+                                                    <div class="">
+                                                        <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                                            SUBCENTRO CIFRAS
+                                                        </p>
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        <div class="col">
+                            <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: var(--bs-teal);border-style: none;" type="button"  data-bs-target="#modal-3" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people" style="font-size: 30px;">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+                                </svg></button>
+                                <div class="px-3">
+                                    <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                        CENTRO COMONES 2
+                                    </p>
+                                </div>
+                              </div>
+
+                              <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: var(--bs-teal);border-style: none;" type="button"  data-bs-target="#modal-8" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-shield-check" style="font-size: 30px;">
+                                    <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"></path>
+                                    <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path>
+                                </svg></button>
+                                <div class="px-3">
+                                    <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                        SUBCENTRO DE APOYO
+                                    </p>
+                                </div>
+                              </div> 
+                            </div>
+            
+
+                        <div class="col">
+                            <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: rgb(188,207,73);border-style: none;" type="button"  data-bs-target="#modal-9" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-journal-bookmark-fill" style="font-size: 30px;">
+                                    <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"></path>
+                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"></path>
+                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"></path>
+                                </svg></button>
+                                <div class="px-3">
+                                    <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                        LOGÍSTICA
+                                    </p>
+                                </div>
+                              </div>  
+                              <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: rgb(188,207,73);border-style: none;" type="button"  data-bs-target="#modal-10" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people" style="font-size: 30px;">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+                                </svg></button>
+                                <div class="px-3">
+                                    <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                       PELOTÓN AM
+                                    </p>
+                                </div>
+                              </div> 
+
+                              <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: rgb(188,207,73);border-style: none;" type="button"  data-bs-target="#modal-12" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-hammer" style="font-size: 30px;">
+                                    <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"></path>
+                                </svg></button>
+                                <div class="px-3">
+                                    <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                        PUNTO MT
+                                    </p>
+                                </div>
+                              </div> 
+                                
+                            </div>
+                            <div class="col">
+
+                                <div class="text-center d-flex flex-column justify-content-center align-items-center py-3" data-aos="zoom-in-up">
+                                    <button class=" bs-icon-md bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon"  data-bss-hover-animate="bounce" style="background: rgb(237,67,56);border-style: none;" type="button"  data-bs-target="#modal-11" data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square" style="font-size: 30px;">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                                    </svg></button>
+                                    <div class="px-3">
+                                        <p class="mb-0" style="font-weight: bold;text-shadow: 0px 0px 11px rgb(0,0,0);color: rgb(255,255,255);">
+                                            UNIDAD DE ESTUDIO
+                                        </p>
+                                    </div>
+                                </div>
+                            
+                                
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                         
+                                </div>
+                            </div>
+                             </div>
+                            
+                             
+ 
+           
+        </div>
+                
+     
+
+
+
+    <section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-6">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title bg-dark text-light">SUBCENTRO COMONES</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Jefe Subcentro Comones ' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+
+
+                  {% for p in entity %}
+                    {% if p.cargo == 'Jefe Grupo Carrro Mando' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+
+                        </div>
+                <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-7">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h4 class="modal-title bg-dark text-light ">SUBCENTRO CIFRAS</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Jefe SubCentro Cifras' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+                        </div>
+                <div class="modal-footer" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="">
+    <div class="container">
+        <div class="text-center ">
+            <div class="modal  fade" role="dialog" tabindex="-1" id="modal-3">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light">
+                        <div class="modal-header bg-dark text-light">
+                            <h4 class="modal-title bg-dark text-light">Centro Comones 2</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% for p in entity %}
+                            {% if p.cargo == 'Jefe Centro  2' %}
+                            <div class="text-center mx-auto " >
+                                <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                                <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                                <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                                <div>
+                                   
+                                 </div> 
+                                 <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                 <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                              {% if p.postgrado %}
+                                              <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                              {% endif %}
+
+                                              {% if p.telefono %}
+                                              <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                              {% endif %}
+
+                                              {% if p.correo %}
+                                              <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                              {% endif %}
+
+                                              {% if p.direccion %}
+                                              <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                              {% endif %}
+                                              <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div>
+                                              
+                                              <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                {% if p.CI == j.user.CI %}
+                                                <div>{{ j.nombre }}</div>
+                                                <hr>
+                                                {% endif %}
+                                                {% endfor %}
+                                                </div>
+                                              
+                                 </div>
+                            {% endif %}
+                            {% endfor %}
+                            {% for p in entity %}
+                            {% if p.cargo == 'Jefe Subcentro Comones 2' %}
+                            <div class="text-center mx-auto " >
+                                <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                                <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                                <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                                <div>
+                                   
+                                 </div> 
+                                 <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                 <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                              {% if p.postgrado %}
+                                              <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                              {% endif %}
+
+                                              {% if p.telefono %}
+                                              <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                              {% endif %}
+
+                                              {% if p.correo %}
+                                              <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                              {% endif %}
+
+                                              {% if p.direccion %}
+                                              <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                              {% endif %}
+                                              <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                              <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                {% if p.CI == j.user.CI %}
+                                                <div>{{ j.nombre }}</div>
+                                                <hr>
+                                                {% endif %}
+                                                {% endfor %}
+                                                </div>
+                                 </div>
+                            {% endif %}
+               
+                          {% endfor %}
+                                </div>
+                        <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+
+<section class="">
+    <div class="container">
+        <div class="text-center ">
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-8">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-dark text-light">
+                        <div class="modal-header bg-dark text-light">
+                            <h4 class="modal-title bg-dark text-light">SUBCENTRO DE APOYO</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% for p in entity %}
+                            {% if p.cargo == 'Subcentro de Apoyo' %}
+                            <div class="text-center mx-auto " >
+                                <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                                <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                                <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                                <div>
+                                   
+                                 </div> 
+                                 <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                                 <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                              {% if p.postgrado %}
+                                              <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                              {% endif %}
+
+                                              {% if p.telefono %}
+                                              <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                              {% endif %}
+
+                                              {% if p.correo %}
+                                              <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                              {% endif %}
+
+                                              {% if p.direccion %}
+                                              <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                              {% endif %}
+                                              <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div>
+                                              <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                                {% if p.CI == j.user.CI %}
+                                                <div>{{ j.nombre }}</div>
+                                                <hr>
+                                                {% endif %}
+                                                {% endfor %}
+                                                </div> 
+                                 </div>
+                            {% endif %}
+                            {% endfor %}
+                            
+                                </div>
+                        <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+
+
+<section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-9">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title bg-dark text-light">LOGÍSTICA</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Logística' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+                        </div>
+                <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-10">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title bg-dark text-light">PELOTÓN AM</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" >
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Pelotón AM' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+                        </div>
+                <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-11">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title bg-dark text-light">Colectivo Profesores</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" >
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Jefe Colectivo Profesores' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+
+                  {% for p in entity %}
+                    {% if p.cargo == 'Colectivo' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+                        </div>
+                <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="">
+    <div class="container">
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-12">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title bg-dark text-light" >PUNTO MT</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" >
+                    
+                    {% for p in entity %}
+                    {% if p.cargo == 'Punto MT' %}
+                    <div class="text-center mx-auto " >
+                        <img class="rounded-circle flex-shrink-0 fit-cover" width="130" height="130" src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}">
+                        <div class="text-start" ><b>Cargo:</b> {{p.cargo}}</div> 
+                        <div class="text-start"> <b>Nombre: </b>{{ p.grado }} {{p}} {{p.apellido2}} </div>
+                        <div>
+                           
+                         </div> 
+                         <div class="text-start"  ><b>Graduado de: </b> {{ p.graduadoDe }} ( {{ p.escuelaProcedencia }} ) </div>  
+                         <div class="text-start" > <b>Nivel Escolar: </b> {{ p.nivel}} </div> 
+                                      {% if p.postgrado %}
+                                      <div class="text-start" > <b>Postgrado(s): </b> {{ p.postgrado}} </div> 
+                                      {% endif %}
+
+                                      {% if p.telefono %}
+                                      <div class="text-start" > <b>Telefono: </b> {{ p.telefono}} </div> 
+                                      {% endif %}
+
+                                      {% if p.correo %}
+                                      <div class="text-start" > <b>Correo: </b> {{ p.correo}} </div> 
+                                      {% endif %}
+
+                                      {% if p.direccion %}
+                                      <div class="text-start" > <b>Dirección: </b> {{ p.direccion }} </div> 
+                                      {% endif %}
+                                      <div class="text-start" > <b>Fecha de Nacimiento: </b> {{ p.fecha_nacimiento }} </div> 
+                                      <div class="text-start" > <b>Postgrado(s): </b> {% for j in posts %}
+                                        {% if p.CI == j.user.CI %}
+                                        <div>{{ j.nombre }}</div>
+                                        <hr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div>
+                         </div>
+                    {% endif %}
+       
+                  {% endfor %}
+                        </div>
+                <div class="modal-footer bg-dark text-light" style="padding-top: 36px;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">cerrar</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+           
+
+          
+
+
+        <div class="container py-4 py-xl-5">
+            <section></section>
+        </div>
+    </section>
+    <footer class="bg-dark text-light">
+        <div class="container  text-center">
+            <p>Colectivo Informático UM-4261 © 2024</p>
+        </div>
+    </footer>
+    <script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    <script src="{% static 'Unidad/js/grayscale.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider.js' %}"></script>
+   
+   
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static  %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <style>
+    label{
+        margin: auto
+
+    }
+    input{
+        margin: auto;
+    }
+   .card{
+        width: 50% !important;
+        margin: auto !important;
+        margin-top: 100px !important;
+    }
+    textarea{
+        width: 90%;
+        min-height: 30px;
+        height: 30px;
+        resize: vertical;
+        max-height: min-content;
+
+    }
+   </style>
+</head>
+<body class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Ingrese la Nota	</h2>
+                        <hr>
+                        <form action="" method="post" class="form-control">
+                            {% csrf_token %}
+                            {{form}}
+                            <input type="submit" value="Entrar">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

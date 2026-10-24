@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+</head>
+<body class="bg-dark text-light">
+    {% include "Cursos/header.html" %}
+    <div class="container">
+        
+        <h3>Gestión de Estudiantes</h3>
+       
+        <div class="row" >
+
+        <div class="col-md-3" >
+        <form action="" method="get" class=" my-2  input-group">
+        <input type="search" name="search" id="search_input" class="form-control bg-dark text-light"  placeholder="Buscar">
+        <button class="btn btn-primary" type="submit"><i class="icon ion-ios-search-strong" style="font-size: 16px;"></i></button>
+       
+
+        </form>
+        
+        </div > 
+        <div class="col-md-3 my-2">
+            
+         </div>
+         
+        </div>
+         
+    <table class="table table-hover table-striped  table-dark ">
+        <tr>
+           <th>CI</th> <th>Nombre</th> <th>Apellídos</th>  <th>UM Proveniencia</th> <th>Opciones</th> 
+        </tr>
+        {% for p in students %}
+          <tr>
+            <td>{{ p.CI }}</td>
+             <td>{{ p.firstName |capfirst }}</td>
+             <td>{{ p.lastName }} {{p.seclastName}}</td>
+             
+             <td> <b>{{p.MU.number}} </b></td>
+             <td>
+                
+    <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Menú</button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'deleteStudent' p.id %}">Eliminar <i class="icon ion-android-delete mx-3" style="font-size: 17px;"></i></a>
+            <a class="dropdown-item" href="{% url 'modifyStudent' p.id %}">Modificar <i class="icon ion-edit mx-2" style="font-size: 15px;"></i></a>
+            <a class="dropdown-item" href="{% url 'studentDetails' p.id %}">Ver más<i class="icon ion-play mx-4" style="font-size: 16px;"></i></a>
+            <a class="dropdown-item" href="{% url 'matricular' p.id %}">Matricular<i class="icon ion-play mx-4" style="font-size: 16px;"></i></a>
+        </div>
+    </div>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+ {% include "Cursos/paginator.html" %}
+ <a href="{% url 'showStudents' %}" class="btn btn-primary float-end">Estudiantes matriculados</a>
+</div>    
+
+    
+    <script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+    
+</body>
+</html>

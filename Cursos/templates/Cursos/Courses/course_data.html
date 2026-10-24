@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+
+</head>
+{% include "Cursos/header.html" %}
+
+<body class="bg-dark text-light">
+    
+    
+ <section class="container">
+    <a href="{% url 'showClosesCourses' %}" class="btn btn-sm btn-secondary float-end mx-5" > Ir atras</a>
+    <h3>{{curso}}</h3> 
+    Desde: {% if curso.start_date %}
+           {{curso.start_date}}
+           {% else %}
+           Sin fecha 
+           {% endif %}
+              <div>Hasta: {% if curso.end_date %}
+                {{curso.end_date}} 
+                {% else %}
+                Sin fecha
+              {% endif %}</div>
+    <div>
+      Descripción:
+       {% if curso.description %}
+       {{ curso.description}}
+       {% else %}
+       Sin datos Agregados
+       {% endif %}
+    </div>
+    <span>Total de estudiantes: {{cantM}}</span>
+    
+<table class="table table-dark table-striped table-hover table-bordered  container mt-4 col-">
+    <tr>
+      <th><b>Estudiante</b></th><th>CI</th> <th></th>
+      
+    </tr>
+    {% for p in entity %}
+    <tr>
+      <td>{{p.Student}} {{ p.Student.seclastName }} </td> 
+      
+      <td> {{ p.Student.CI }}</td>
+  
+      <td> <a class="btn btn-primary btn-sm"  href="{% url 'studentDetails' p.Student.id %}"> Datos</a></td>
+
+   </tr>
+         {% endfor %} 
+  </table>
+  
+  
+  
+  
+ </section>
+
+
+
+</body>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

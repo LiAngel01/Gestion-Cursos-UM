@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitledprueba</title>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Login-Form-Basic-icons.css' %}"> 
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/aos.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css">
+    <style>
+        #postgrado{
+            width: 240px !important;
+        }
+    </style>
+</head>
+
+<body class="bg-dark" style="background: repeating-linear-gradient(156deg, var(--bs-blue) 14%, black 30%), var(--bs-pink); ">
+    <section class="py-4 py-xl-5">
+        <div class="container">
+            <a href="{% url 'list_users' %}" class="btn btn-secondary">Volver Atrás</a>
+            <div class="row d-flex justify-content-center" style="margin-top: 13px;">
+                <div class="col-md-6 col-xl-4 " style="width: 997px;">
+                    <div class="card mb-5 text-center" style="width: 897px;background: rgba(255,255,255,0.16);border-radius: 24px;border: 1px solid var(--bs-black);box-shadow: 0px 0px 20px rgb(20,22,24);">
+                        <div class="card-body d-flex flex-column align-items-center" style="height: 520px;margin-top: -63px;margin-right: 70px;margin-bottom: 26px;padding: 7px;">
+                            <div class="bs-icon-xl bs-icon-circle bs-icon-primary pulse animated infinite bs-icon my-4" style="width: 85px;height: 85px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-plus" style="font-size: 41px;">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"></path>
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+                                </svg></div>
+                            <form class="" method="post" >
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col" style="width: 200.7px;">
+                                        <label class="form-label fw-light text-white shadow-sm">Nombre:</label>
+                                        <input class="form-control" type="text" data-aos="zoom-in-right" data-aos-duration="900" name="nombre" placeholder="Nombre" required="" style="background: var(--bs-card-bg);">
+                                        
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Carnet Militar:</label>
+                                        <input class="form-control" type="text" pattern="[0-9]{6}" title="Ingrese un Carnet Militar de 6 dígitos" data-aos="zoom-in-right" data-aos-duration="900" placeholder="CI" name="CI" min="6" max="11" required="" style="margin-top: 10px;background: var(--bs-card-bg);">
+                                        
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Grado Militar:</label>
+                                        <select class="form-select" data-aos="zoom-in-right" name="grado" data-aos-duration="900" style="margin-top: 10px;background: var(--bs-card-bg);" required >
+                                            <option value="">-----</option>
+                                            <option value="SubOficial">SubOficial </option>
+                                            <option value="SubTeniente">SubTeniente</option>
+                                            <option value="Teniente">Teniente</option>
+                                            <option value="Primer Teniente">Primer Teniente</option>
+                                            <option value="Capitán">Capitán</option>
+                                            <option value="Mayor">Mayor</option>
+                                            <option value="Teniente Coronel">Teniente Coronel</option>
+                                            <option value="Coronel">Coronel</option>
+                                        </select>
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Correo Eléctronic:</label>
+                                        <input class="form-control" type="email" data-aos="zoom-in-right" data-aos-duration="900" placeholder="Correo" name="correo" style="margin-top: 10px;background: var(--bs-card-bg);"></div>
+                                    <div class="col" style="width: 200.7px;">
+                                        <label class="form-label fw-light text-white shadow-sm">Primer Apellido:</label>
+                                        <input class="form-control" type="text" data-aos="zoom-in-right" data-aos-duration="900" name="apellido1" placeholder="Primer Apellido" style="background: var(--bs-card-bg);">
+                                        <label class="form-label fw-light text-white shadow-sm"  style="margin-bottom: 0px;margin-top: 7px;">Graduado de:</label>
+                                        <select class="form-select" data-aos="zoom-in-right" data-aos-duration="900" name="GraduadoDe" required style="margin-top: 10px;background: var(--bs-card-bg);">
+                                            <option value="">-----</option>
+                                            <option value="Ingeniero Telecomunicaciones">Ingeniero Telecomunicaciones</option>
+                                            <option value="Licenciado Mando Comunicaciones">Licenciado Mando Comunicaciones</option>
+                                            <option value="Técnico Medio Superior Comunicaciones">Técnico Medio Superior Comunicaciones</option> 
+                                            <option value="Ingeniero Informático">Ingeniero Informático</option> 
+                                            <option value="Ingeniero Ciber Seguridad">Ingeniero Ciber Seguridad</option> 
+                                            <option value="Ingeniero Automático">Ingeniero Automático</option> 
+                                            <option value="Otro">Otro</option>  
+                                        </select>
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Número Teléfono:</label>
+                                        <input class="form-control" type="tel" data-aos="zoom-in-right" pattern="[0-9]{8}" title="Ingrese un número de 8 dígitos" data-aos-duration="900" placeholder="No. Teléfono" name="teléfono" style="margin-top: 10px;background: var(--bs-card-bg);">
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Fecha de Nac.:</label>
+                                        <input class="form-control" data-aos="zoom-in-right" data-aos-duration="900" name="fecha" type="date" required="" style="margin-top: 10px;background: var(--bs-card-bg);"></div>
+                                    <div class="col" style="width: 200.7px;">
+                                        <label class="form-label fw-light text-white shadow-sm">Segundo Apellido:</label>
+                                        <input class="form-control" type="text" data-aos="zoom-in-left" data-aos-duration="900" name="apellido2" placeholder="Segundo Apellido" style="background: var(--bs-card-bg);">
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Escuela de Proc. :</label>
+                                        <select class="form-select" data-aos="zoom-in-left" data-aos-duration="900" name="escuela" style="margin-top: 10px;background: var(--bs-card-bg);" required>
+                                            <option value="">-----</option>
+                                            <option value="ITM">ITM</option>
+                                            <option value="EIFAM">EIFAM</option>
+                                            <option value="EIFJM">EIFJM</option>
+                                            <option value="UCI">UCI</option>
+                                            <option value="CUJAE">CUJAE</option>
+                                            <option value="UH">UH</option>
+                                            <option value="UM 4261">UM 4261</option>
+                                        </select>
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Cargo que ocupa:</label>
+                                        <select class="form-select" name="cargo" data-aos="zoom-in-left" data-aos-duration="900" required="" style="margin-top: 10px;background: var(--bs-card-bg);" required>
+                                            <option value="" >-----</option>
+                                            <option value="Jefe U/M">Jefe U/M</option>
+                                            <option value="2do Jefe U/M">2do Jefe U/M</option>
+                                            <option value="Político">Político</option>
+                                            <option value="OyP">OyP</option>
+                                            <option value="Colectivo Profesores">Jefe Colectivo Profesores</option>
+                                            <option value="Jefe Centro 1">Jefe CC1</option>
+                                            <option value="Jefe Subcentro Comones">Jefe SubCC1</option>
+                                            <option value="Jefe Grupo Carro Mando">Jefe Grupo Carro Mando</option>
+                                            <option value="Técnico Radios">Técnico Radios</option>
+                                            <option value="Jefe Sala Comunicaciones Móvil">Jefe Sala Comunicaciones Móviles</option>
+                                            <option value="Jefe Grupo Tele-Comunicaciones">Jefe Grupo Tele-Cominicaciones</option>
+                                            <option value="Jefe Grupo Telefónico">Jefe Grupo Telefónico</option>
+                                            <option value="Jefe SubCentro Cifras">Jefe SubCentro Cifras</option>
+                                            <option value="Técnico Cifras">Técnico de Cifras</option>
+                                            <option value="Jefe Grupo Cifras">Jefe Grupo Cifras</option>
+                                            <option value="Subcentro de Apoyo">Subcentro de Apoyo</option>
+                                            <option value="Jefe Grupo Comunicaciones Apoyo">Jefe Gpo Cx Apoyo</option>
+                                            <option value="Puesto MT">Puesto MT</option>
+                                            <option value="Jefe Centro 2">Jefe CC2</option>
+                                            <option value="Jefe Subcentro Comones 2">Jefe SubCC2</option>
+                                            <option value="Colectivo">Colectivo</option>
+                                            <option value="Ingeniero Principal">Ingeniero Principal</option>
+                                            <option value="Técnico Tanques y Transporte">Técnico TyT</option>
+                                            <option value="Logística">Logística</option>
+                                            <option value="Ingeniero Principal CC1">Ingeniero P. CC1</option>
+                                        </select>
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-bottom: 0px;margin-top: 7px;">Nivel Académico:</label>
+                                        <select class="form-select" data-aos="zoom-in-left" data-aos-duration="900" name="nivel" style="margin-top: 10px;background: var(--bs-card-bg);" required>
+                                            <option value="" >-----</option>
+                                            <option value="Nivel Superior">Nivel Superior</option>
+                                            <option value="Nivel Medio">Nivel Medio</option>
+                                            <option value="Nivel Básico">Nivel Básico</option>
+                                            
+                                        </select></div>
+                                    <div class="col postgrado" style="width: 200.7px;">
+
+                                        <label class="form-label fw-light text-white shadow-sm" >Dirección:</label>
+                                        <input class="form-control" type="text" data-aos="zoom-in-right" data-aos-duration="900" name="direccion" placeholder="Direccion" required="" style="background: var(--bs-card-bg);">
+                                        
+
+                                        <label class="form-label fw-light text-white shadow-sm" style="margin-top:7px; margin-bottom:10px;">Postgrado:</label>
+                                        <div onclick="replicarInput()" class="btn btn-success float-end" style="padding:0;margin:5px; width:20px;"><i class="icon ion-plus" style="font-size: 16px;"></i></div>
+                                        <input class="form-control" id="postgrado" type="text" data-aos="zoom-in-left" data-aos-duration="900" placeholder="Postgrado" name="postgrado" style="width: 136.7px;background: var(--bs-card-bg);"></div>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <input type="reset" value="Cancelar" class="btn btn-secondary">
+                                    <input type="submit" value="Guardar" class="btn btn-primary">
+                                </div>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/aos.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+</body>
+<script>
+    function replicarInput() {
+        // Obtener el elemento padre del input
+        const contenedor = document.querySelector('.postgrado');
+      
+        // Crear el nuevo input
+        const nuevoInputText = document.createElement('input');
+        nuevoInputText.classList.add('form-control');
+        nuevoInputText.type = 'text';
+        nuevoInputText.dataset.aos = 'zoom-in-left';
+        nuevoInputText.dataset.aosDuration = '900';
+        nuevoInputText.placeholder = 'Postgrado';
+      
+        // Obtener el número más alto del atributo "name" existente
+        const inputsExistentes = contenedor.querySelectorAll('input[name^="postgrado"]');
+        let numeroMasAlto = 0;
+        if (inputsExistentes.length > 0) {
+          const ultimoInput = inputsExistentes[inputsExistentes.length - 1];
+          const ultimoNumero = parseInt(ultimoInput.name.replace('postgrado', ''));
+          numeroMasAlto = isNaN(ultimoNumero) ? 0 : ultimoNumero;
+        }
+      
+        // Establecer el nuevo nombre del input
+        nuevoInputText.name = `postgrado${numeroMasAlto + 1}`;
+        nuevoInputText.style.width = '240px';
+        nuevoInputText.style.background = 'var(--bs-card-bg)';
+      
+        // Agregar el nuevo input debajo del existente
+        contenedor.appendChild(nuevoInputText);
+      }
+      
+</script>
+
+</html>

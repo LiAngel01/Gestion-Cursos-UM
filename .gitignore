@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+.vscode/
+
+# Local databases and uploaded/generated data
+*.sqlite3
+*.sqlite3-*
+*.db
+Media/**
+staticfiles/
+
+# Local image files may contain personal or sensitive information.
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.bmp
+*.ico
+*.pdf
+
+# Logs and OS-generated files
+*.log
+Thumbs.db
+Desktop.ini

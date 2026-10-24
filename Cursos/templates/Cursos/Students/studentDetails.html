@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      
+      
+    </style>
+</head>
+
+{% include "Cursos/header.html" %}
+<body class="bg-dark text-light  " style="background: url( {% static 'Unidad/img/carousel img/portfolio-2.jpg' %}) no-repeat;background-size: cover;background-position:center center;background-attachment:fixed;">
+  
+  {% if messages %}
+  {% for m in messages %}
+   <script>
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "{{m}} !",
+      
+    });
+   </script> 
+   
+  {% endfor %}
+    
+  {% endif %}
+  {% if user.username == "OyP" or  user.username == "admin" or user.username == "Colectivo" %}
+  <a class="btn btn-secondary btn-sm float-end m-2 my-2" href="{% url 'modifyStudent' student.id %}">Modificar <i class="icon ion-edit float-end" style="font-size: 15px;"></i></a> 
+ 
+
+  <div class="dropdown float-end m-1"><button class="btn btn-secondary btn-sm m-1 dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Menú</button>
+    <div class="dropdown-menu dropdown-menu-dark ">
+      {% if user.username == "OyP" or user.username == "admin" %}
+        <a class="dropdown-item" href="{% url 'genFicha' student.id %}">Generar Ficha <i class="icon ion-play float-end" style="font-size: 17px;"></i></a>
+        
+        {% endif %}
+        {% if not mat %}
+           <a class="dropdown-item" href="{% url 'matricular' student.id %}">Matricular<i class="icon ion-play mx-4" style="font-size: 16px;"></i></a>
+
+        {% endif %}
+        
+        {% if user.username == "Colectivo" or user.username == "admin" %}
+        {% if student.valoracion  %}
+        <a href="{% url 'valToStudent' student.id %}" class="dropdown-item">Cambiar Resumen General</a>
+        {% else %}
+        <a href="{% url 'valToStudent' student.id %}" class="dropdown-item">Agregar Resumen General</a>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+        
+    <div class="container mt-5">
+
+
+<div class="row featurette">
+    <div class="col-md-6 order-md-2">
+      
+      <div class="col-md-10">
+        
+        <label for="lastName" class="form-label  ">Cursos actuales: </label>
+        {% for i in entity  %}
+          {% if i.Student == student %}
+
+          <label for="" class="form-control p-auto mb-3 bg-dark text-light ">
+            <div class="dropdown float-end "><button class="btn btn-secondary btn-sm mx-1 dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Menú</button>
+              <div class="dropdown-menu dropdown-menu-dark">
+                {% for nf in notafinal %}
+               {% if nf.Course == i.Course %}
+               {% if nf.fn >= 3 %}
+               <a class="dropdown-item bg-info" href="{% url 'screenshot' i.id %}">Generar Título<i class="icon ion-play float-end" style="font-size: 17px;"></i></a>
+               {% endif %}
+               
+               {% endif %}
+             {% endfor %}
+
+                  <a href="{% url 'matriculadosEn' i.Course.id %}" class="dropdown-item">Listado del curso {{ i.Course }}</a>
+                  {% if user.username == "OyP" or user.username == "admin" %}
+                  <a class="dropdown-item " href="{% url 'deleteMat' i.id %}">Eliminar Matrícula <i class="icon ion-android-delete float-end" style="font-size: 15px;"></i></a>
+                  {% endif  %}
+                  
+                 
+              </div>
+          </div>
+           
+
+           
+
+            
+            <h4>{{ i.Course }} </h4>
+            {% if user.username == "Colectivo" or user.username == "admin" %}
+              
+           {% for k in notafinal %}
+            {% if k.Course == i.Course %}
+            {% if i.primerExpediente == True %} 
+            <div><a href="{% url 'primer_expediente' i.id %}" class="btn btn-secondary btn-sm float-end" >No Primer Expediente </a></div>
+            {% else %}
+            <div><a href="{% url 'primer_expediente' i.id %}" class="btn btn-info btn-sm float-end" >Primer Expediente </a></div>
+              {% endif %}
+            
+           <div>Nota Final: {{k.fn}} {% if i.primerExpediente == True %} <i>(Primer Expediente)</i>
+            {% endif %} <a class="btn btn-sm btn-primary float-end mx-1" href="{% url 'modificarNF' k.id  %}"> Nota Final</a></div>
+           
+            {% endif %}
+           {% endfor %}
+
+            {% for nf in notaf %}
+               {% if nf.Course == i.Course %}
+               <div>Nota Promedio: 
+                 {{nf.final_note }}
+                </div>
+               {% endif %}
+             {% endfor %}
+            <hr>
+            {% endif %}
+           
+          <div class="text-start">
+            {% if user.username == "Colectivo" or user.username == "admin" %}
+ 
+          <a class="btn btn-sm btn-primary " href="{% url 'add_note' i.id %}">Agregar Nota</a>
+
+           {% endif %}
+          </div>
+<hr>
+
+            {% for n in notas  %}
+            
+              
+            
+                {% if n.Student.id == student.id and n.Course.id == i.Course.id  %}
+                {% if n.note %}
+                {% if not n.note == 0 %}
+                <h6 class=""></h6>       
+                {% if user.username == "Colectivo" or user.username == "admin" %}
+                  <div class="dropdown float-end "><button class="btn btn-secondary btn-sm mx-1 dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Acciones</button>
+                  <div class="dropdown-menu dropdown-menu-dark">
+                      <a class="dropdown-item" href="{% url 'noteToStudent' n.id %}">Cambiar nota <i class="icon ion-edit float-end" style="font-size: 17px;"></i></a>
+                      <a class="dropdown-item" href="{% url 'deleteNote' n.id %}">Eliminar Nota <i class="icon ion-android-delete float-end" style="font-size: 15px;"></i></a>
+                     
+                     
+                  </div>
+              </div>
+             
+                {% endif %}     
+                {% if user.username == "Colectivo" or user.username == "admin" %}
+                  <ul class="btn btn-sm btn-primary mx-2 mb-2 float-end ">
+                      <div class=" dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Resumen</a>
+                          <div class="dropdown-menu dropdown-menu-dark border" style="width:375px"><div class="mx-2 text-wrap text-light">{% if n.valoracion %}
+                            {{n.valoracion}}
+                            {% else %}
+                            No se ha elaborado el resumen de la evaluación 
+                            {% endif %}</div>
+                              
+                          </div>
+                  </ul>
+                
+                {% endif %}
+                   
+                  
+             
+                    
+                 
+                 
+                  <div class="d-flex justify-content-between "> 
+                     {% if user.username == "Colectivo" or user.username == "admin" %}
+                    <h6>Nota {% if n.tval %}
+                     {{n.tval}}
+                     {% endif %} :  {{n.note}}</h6>
+                     <hr>
+                    {% endif %}
+                     </div>
+                
+                    
+                 {% endif %}
+                {% endif %}
+                
+
+                   
+             
+             
+                    
+        
+
+                {% endif %}
+            {% endfor %} 
+          </label>
+           
+          {% endif %}
+          
+          
+         
+        {% endfor %} 
+       
+        </div>
+        
+       
+      <h2 class="featurette-heading fw-normal lh-1"> <span class="text-muted">Resumen General:</span></h2>
+      {% if student.valoracion  %}
+      <p class="lead">{{student.valoracion}}</p>
+      {% else %}
+      <p class="lead">No se ha realizado una valoracion sobre el estudiante.</p>
+      {% endif %}
+      
+    </div>
+    <div class="col-md-6 order-md-1 ">
+
+      <h5>Datos del estudiante</h5>
+      <div class="col-md-7">
+
+        <div class="dropdown float-end "><button class="btn btn-secondary btn-sm mx-1 dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Cambiar foto</button>
+          <div class="dropdown-menu dropdown-menu-dark ">
+              <a class="dropdown-item text-light" href="{% url 'changePhoto' student.id %}"> Capturar por Camara </a>
+              <a class="dropdown-item text-light" href="{% url 'loadPhoto' student.id %}">Cargar desde Archivos </a>
+             
+             
+          </div>
+      </div>
+
+        <!--<a href="{% url 'changePhoto' student.id %}" class="btn btn-secondary btn-sm float-end m-2">Cambiar foto</a>-->
+        {% if student.picture %}
+        <img src="{{ student.picture.url }}" onerror="this.onerror=null;this.src='{% static 'Unidad/img/avatars/avatar1.jpeg' %}'" alt="Foto de {{ student }}" class="bd-placeholder-img m-auto rounded-circle" width="200" height="200" preserveAspectRatio="xMidYMid slice">
+        {% else %}
+        <img src="{% static 'Unidad/img/avatars/avatar1.jpeg' %}" alt="Foto no disponible" class="bd-placeholder-img m-auto rounded-circle" width="200" height="200">
+        {% endif %}
+        
+      
+      </div>
+      <div class="row col-md-7">
+         <div class="col-md-6">
+           <label for="firstName" class="form-label">CI </label>
+           <label for="" class="form-control p-auto bg-dark text-light"> {{student.CI}}</label>
+           </div>
+           <div class="col-md-3">
+            <label for="firstName" class="form-label">Tomo </label>
+            <label for="" class="form-control p-auto bg-dark text-light"> {{student.tomo}}</label>
+            </div>
+            <div class="col-md-3">
+              <label for="firstName" class="form-label">Folio</label>
+              <label for="" class="form-control p-auto bg-dark text-light"> {{student.folio}}</label>
+              </div>
+       
+         </div>
+
+
+        <div class="col-md-7">
+            <label for="firstName" class="form-label">Nombre</label>
+            <label for="" class="form-control p-auto bg-dark text-light"> {{student.firstName}}</label>
+           
+          </div>
+
+        <div class="col-md-7">
+            <label for="lastName" class="form-label">Apellídos</label>
+            <label for="" class="form-control p-auto bg-dark text-light "> {{student.lastName}}  {{student.seclastName}}</label>
+           </div> 
+           <div class="col-md-7">
+            <label for="lastName" class="form-label">Nivel Escolar</label>
+            <label for="" class="form-control p-auto bg-dark text-light "> {{student.nivelEscolar}}</label>
+           </div> 
+           
+           
+           <div class="col-md-7">
+            <label for="lastName" class="form-label">UM de Procedencia</label>
+            <label for="" class="form-control p-auto bg-dark text-light "> {{student.MU}}  </label>
+           </div>
+           <div class="col-md-7">
+            <label for="firstName" class="form-label">Telefono</label>
+            <label for="" class="form-control p-auto bg-dark text-light ">{% if student.telefono %}
+              {{student.telefono}}
+              {% else %}
+               Sin Número
+              {% endif %}
+            </label>
+           
+          </div>
+          
+           <div>
+           
+           </div>
+
+    </div>
+    
+  </div>
+  <div class="col-md-12" >
+    <label for="lastName" class="form-label mt-3"><h4>Registro histórico de cursos:</h4></label>
+     {% for c in courses %}
+     
+      <label class="form-control mb-2 bg-dark text-light" for=""><b> {{c.Course}}</b>
+        <div>Fecha de matriculacion: {{c.fecha}} </div>
+        {% for k in notafinalr %}
+          {% if k.Course == c.Course %}
+            <div>Nota Final: {{k.fn}}</div>
+          {% endif %}
+        {% endfor %}
+        {% for nfr in notafr %}
+        {% if nfr.Course == c.Course %}
+        <div>Nota Promedio: {{nfr.final_note }} </div>
+        {% endif %}
+      {% endfor %}
+       <hr>
+       {% for nr in notasR %}
+         {% if nr.Course == c.Course %}
+         <b>{{nr.tval}}: </b>{{nr.note}}
+
+        <br>
+         {% if nr.valoracion %}
+                     {{nr.valoracion}}
+                     {% else %}
+                     No se ha realizado un resuman de la evaluacion 
+                     {% endif %}
+
+         <br>
+         
+         <br>
+         {% endif %}
+       
+       {% endfor %}
+     </label>
+     {% endfor %}</div> 
+</div>
+</body>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>

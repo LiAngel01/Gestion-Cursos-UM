@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Cursos/fonts/ionicons.min.css' %}">
+</head>
+<body class="bg-dark text-light ">
+    {% include "Cursos/header.html" %}
+ 
+<section class="container">
+   <a class="btn btn-secondary float-end btn-sm " href="{% url 'courses' %}">Volver a Cursos Abiertos</a>
+    <h3>Registro de Cursos</h3>
+
+    <form action="" method="get" class=" my-4  input-group " style="width: 300px;">
+        <input type="search" name="search" id="search_input" class="form-control bg-dark text-light "  placeholder="Buscar...">
+        <button class="btn btn-primary" type="submit"><i class="icon ion-ios-search-strong" style="font-size: 16px;"></i></button>
+       
+
+        </form>
+
+    <table class="table table-hover table-striped table-dark table-sm ">
+        <tr>
+            <th>Nombre</th><th>Fecha Inicio</th><th>Fecha de Cierre</th> <th>Opciones</th>
+        </tr>
+        {% for p in entity  %}
+        {% if not p.isActive  %}
+          
+        
+          <tr>
+             <td>{{ p.name }}</td>
+             <td>{{ p.start_date }}</td>
+             <td>{{ p.end_date }}</td>
+             <td>
+                <div class="dropdown"><button class="btn btn-secondary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Menú</button>
+                    <div class="dropdown-menu dropdown-menu-dark ">
+                        
+                          <a class="dropdown-item" href="{% url 'modifyCourse' p.id %}">Modificar<i class="icon ion-edit float-end" style="font-size: 15px;"></i></a>
+                          <a class="dropdown-item" href="{% url 'fichaCourse' p.id %}">Generar Ficha<i class="icon ion-edit float-end" style="font-size: 15px;"></i></a>
+                          
+                         
+                          <!--<a class="dropdown-item" href="{% url 'deleteCourse' p.id %}" onclick="return confirm('Está seguro de Eliminar el curso? ')"  >Eliminar  <i class="icon ion-android-delete float-end" style="font-size: 17px;"></i></a>-->
+                        
+                          <a href="{% url 'reopenCourse' p.id %}" class="dropdown-item " >Reabrir Curso</a>
+                          
+                             <a class="dropdown-item" href="{% url 'CourseData' p.id  %}">Ver datos<i class="icon ion-play float-end" style="font-size: 15px;"></i></a>
+                             <a href="{% url 'deleteCourse' p.id %}" class="dropdown-item bg-danger" onclick="return confirm('Está seguro de Eliminar el curso? ')">Eliminar Registro</a>
+                        </div>
+                </div>
+               
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+
+</section>
+</body>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>

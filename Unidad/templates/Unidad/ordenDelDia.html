@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es-es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>web 4261</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Unidad/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Articles-Cards-images.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Features-Large-Icons-icons.css' %}">
+    <link rel="stylesheet" href="{% static  'Unidad/css/Simple-Slider-swiper-bundle.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Unidad/css/Simple-Slider.css' %}">
+
+
+
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carrois+Gothic&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/swiper-icons.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/aos.min.css">
+    <link rel="stylesheet" href="assets/css/Articles-Cards-images.css">
+    <link rel="stylesheet" href="assets/css/Features-Large-Icons-icons.css">
+    <link rel="stylesheet" href="assets/css/Simple-Slider-swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/Simple-Slider.css">
+</head>
+
+<body style="background: url( {% static 'Unidad/img/carousel img/bg-callout.jpg' %}) no-repeat center / cover fixed;">
+    <nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav" style="text-shadow: 0px 0px 20px rgb(1,1,1);">
+        <div class="container">
+            <div class="sidebar-brand-icon rotate-n-15"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-broadcast-pin" style="font-size: 55px;padding-right: 9px;color: var(--swiper-theme-color);text-shadow: 0px 0px 20px var(--bs-black);padding-bottom: 0px;margin-bottom: 9px;">
+                    <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"></path>
+                </svg></div><a class="navbar-brand" href="{% url 'index' %}#horario">UM 4261</a><button data-bs-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive" style="padding-top: 0px;">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item nav-link"><a class="nav-link" href="{% url 'index' %}#about">Historia</a></li>
+                    <li class="nav-item nav-link"><a class="nav-link" href="{% url 'index' %}#download">Misión</a></li>
+                    <li class="nav-item nav-link"><a class="nav-link" href="{% url 'index' %}#features">features</a></li>
+                    <li class="nav-item nav-link"><a class="nav-link" href="{% url 'index' %}#colectivo">colectivo</a></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-10 col-xl-9 offset-lg-1 mx-auto">
+                <div class="text-center cta-inner rounded" style="padding-top: 109px;">
+                    <h2 class="section-heading mb-5"><span class="section-heading-upper text-light" style="margin-top: -2px;padding-bottom: 0px;padding-top: 0px;text-shadow: 0px 0px 20px rgb(0,0,0);">Horario del dÍa</span><span class="section-heading-lower"></span></h2>
+                    <div>
+                        <div class="table-responsive text-start" style="border-radius: 32px;">
+                            <table class="table table-striped table-hover table-dark table-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-4">Actividades</th>
+                                        <th class="fs-5">Días Laborables</th>
+                                        <th class="fs-5">Días no Laborables</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-aos="slide-down">De píe para el personal de guardia</td>
+                                        <td data-aos="slide-down">05:30</td>
+                                        <td data-aos="slide-down">06:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">De píe para los cuadros de mando</td>
+                                        <td data-aos="slide-down">05:40</td>
+                                        <td data-aos="slide-down">06:40</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación de los cuadros de mando</td>
+                                        <td data-aos="slide-down">05:45</td>
+                                        <td data-aos="slide-down">06:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down" class="pe-md-5">De pie para todo el personal y formación para el entrenamiento matutino</td>
+                                        <td data-aos="slide-down">06:00</td>
+                                        <td data-aos="slide-down">07:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Entrenamiento matutino</td>
+                                        <td data-aos="slide-down">06:10</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Limpieza de áreas</td>
+                                        <td data-aos="slide-down">06:20</td>
+                                        <td data-aos="slide-down">07:35</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Presentación del personal de autoservicio al JTC</td>
+                                        <td data-aos="slide-down">06:30</td>
+                                        <td data-aos="slide-down">07:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Aseo personal</td>
+                                        <td data-aos="slide-down">06:55</td>
+                                        <td data-aos="slide-down">07:10</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Control matutino</td>
+                                        <td data-aos="slide-down">07:10</td>
+                                        <td data-aos="slide-down">07:25</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación y Desayuno</td>
+                                        <td data-aos="slide-down">07:20</td>
+                                        <td data-aos="slide-down">08:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación general para las clases, trabajos u otras actividades</td>
+                                        <td data-aos="slide-down">08:00</td>
+                                        <td data-aos="slide-down">08:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Traslado para las áreas de trabajo o clases</td>
+                                        <td data-aos="slide-down">08:25</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Horario de clases&nbsp;</td>
+                                        <td data-aos="slide-down">08:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Primer Turno</td>
+                                        <td data-aos="slide-down">08:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Segundo Turno</td>
+                                        <td data-aos="slide-down">09:20</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Receso</td>
+                                        <td data-aos="slide-down">10:05</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Tercer Turno</td>
+                                        <td data-aos="slide-down">10:30</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Presentación del personal de autoservicio al JTC</td>
+                                        <td data-aos="slide-down">11:00</td>
+                                        <td data-aos="slide-down">11:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación y Traslado hacia el comedor</td>
+                                        <td data-aos="slide-down">12:10</td>
+                                        <td data-aos="slide-down">12:10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Almuerzo servicio de guardia y trabajadores civiles</td>
+                                        <td data-aos="slide-down">11:30</td>
+                                        <td data-aos="slide-down">11:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Almuerzo UM 4261 y Oficiales</td>
+                                        <td data-aos="slide-down">12:30</td>
+                                        <td data-aos="slide-down">12:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Descanso para el servicio de guardia saliente</td>
+                                        <td data-aos="slide-down">12:20</td>
+                                        <td data-aos="slide-down">12:20</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Descanso y tiempo libre</td>
+                                        <td data-aos="slide-down">13:00</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación para las actividades de la tarde</td>
+                                        <td data-aos="slide-down">14:00</td>
+                                        <td data-aos="slide-down">14:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Actividades deportivas (Jueves)</td>
+                                        <td data-aos="slide-down">14:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Actividades deportivas, recreativas de fin de semana y visitas de familiares a sargentos, cabos y soldados</td>
+                                        <td data-aos="slide-down">-</td>
+                                        <td data-aos="slide-down">08:40&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 14:10</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Quinto Turno</td>
+                                        <td data-aos="slide-down">14:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Sexto Turno</td>
+                                        <td data-aos="slide-down">15:20</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Preparación de los dirigentes de las clases del próximo día</td>
+                                        <td data-aos="slide-down">14:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Día del mantenimiento del material de guerra (1er Lunes)</td>
+                                        <td data-aos="slide-down">08:30</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">formación y resumen de las actividades del día en la UM&nbsp;</td>
+                                        <td data-aos="slide-down">16:20</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Traslado del Personal de la UM hacia el polígono</td>
+                                        <td data-aos="slide-down">16:35</td>
+                                        <td data-aos="slide-down">16:35</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación y puntualización de la disposición combativa del campamento</td>
+                                        <td data-aos="slide-down">16:50</td>
+                                        <td data-aos="slide-down">16:50</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Presentación del personal de autoservicio al JTC</td>
+                                        <td data-aos="slide-down">17:00</td>
+                                        <td data-aos="slide-down">17:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Salida del Transporte</td>
+                                        <td data-aos="slide-down">17:15</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Baño</td>
+                                        <td data-aos="slide-down">17:00</td>
+                                        <td data-aos="slide-down">17:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Inspección vespertina</td>
+                                        <td data-aos="slide-down">17:30</td>
+                                        <td data-aos="slide-down">17:15</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación para la Comida</td>
+                                        <td data-aos="slide-down">17:40</td>
+                                        <td data-aos="slide-down">17:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Comida servicio de guardia</td>
+                                        <td data-aos="slide-down">17:30</td>
+                                        <td data-aos="slide-down">17:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Comida unidades</td>
+                                        <td data-aos="slide-down">17:50</td>
+                                        <td data-aos="slide-down">17:40</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Séptimo turno (Nocturno)</td>
+                                        <td data-aos="slide-down">19:00</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Octavo Turno (Nocturno)</td>
+                                        <td data-aos="slide-down">19:50</td>
+                                        <td data-aos="slide-down">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Audiovisión emisión estelar NTV</td>
+                                        <td data-aos="slide-down">20:00</td>
+                                        <td data-aos="slide-down">20:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Autopreparación (actividades recreativas)</td>
+                                        <td data-aos="slide-down">20:30</td>
+                                        <td data-aos="slide-down">20:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Formación para el pase de lista y Control Nocturno</td>
+                                        <td data-aos="slide-down">21:40</td>
+                                        <td data-aos="slide-down">22:40</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-aos="slide-down">Silencio</td>
+                                        <td data-aos="slide-down">22:00</td>
+                                        <td data-aos="slide-down">23:00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="address mb-0 text-light"><small><em style="text-shadow: 0px 0px 20px rgb(0,0,0);">Jefe Unidad Militar</em></small><span style="text-shadow: 0px 0px 20px rgb(0,0,0);"><br>My. José Javier Martínez León</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background: rgba(0,0,0,0.64);position: relative;display: block;overflow: hidden;height: 27.391px;width: 100%;">
+        <div class="container text-center text-light">
+            <p>Colectivo Informático UM-4261 © 2024</p>
+        </div>
+    
+    </footer>
+
+
+    <script src="{% static 'Unidad/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/aos.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/bs-init.js' %}"></script>
+    <script src="{% static 'Unidad/js/grayscale.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'Unidad/js/Simple-Slider.js' %}"></script>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/aos.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="assets/js/Simple-Slider-swiper-bundle.min.js"></script>
+    <script src="assets/js/Simple-Slider.js"></script>
+</body>
+
+</html>

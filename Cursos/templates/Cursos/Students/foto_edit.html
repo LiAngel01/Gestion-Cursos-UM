@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Cursos/css/bootstrap.min.css' %}">
+    <style>
+        #captured-photo {
+            display: none;
+            width: 320px;
+            height: 240px;
+            margin: 20px auto; /* Centrar horizontalmente */
+            border: 2px solid #fff; /* Borde blanco para destacar */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+    </style>
+</head>
+<body class="container text-center bg-dark text-light">
+    <a href="{% url 'studentDetails' student.id %}" class="btn btn-secondary float-end mx-3 btn-sm">Ir atrás</a>
+    <div>
+        <h4 class="mx-auto">Foto:</h4>
+        {% if photo_error %}
+        <div class="alert alert-danger" role="alert">{{ photo_error }}</div>
+        {% endif %}
+        <div id="camera-container" class="mx-auto mt-5">
+            <video id="camera-video" width="320" height="240" autoplay></video>
+            <canvas id="photo-canvas" width="320" height="240" style="display:none;"></canvas>
+        </div>
+        <button id="capture-button" class="btn btn-primary mt-3">Capturar Foto</button>
+        
+        <!-- Imagen capturada centrada -->
+        <img id="captured-photo" src="" alt="Foto Capturada" />
+        
+        <form id="photo-form" action="{% url 'changePhoto' student.id %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" name="photo" id="photo-input">
+            <input type="submit" class="btn btn-success mt-3" value="Guardar Foto">
+        </form>
+    </div>
+    <script>
+        window.addEventListener("load", showCamera);
+
+        function showCamera() {
+            // Mostrar el contenedor de la cámara
+            var cameraContainer = document.getElementById('camera-container');
+            cameraContainer.style.display = 'block';
+
+            // Acceder a la cámara y mostrar la imagen en el video
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    var video = document.getElementById('camera-video');
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(error) {
+                    console.error('Error al acceder a la cámara:', error);
+                });
+        }
+
+        document.getElementById('capture-button').addEventListener('click', function() {
+            const video = document.getElementById('camera-video');
+            const canvas = document.getElementById('photo-canvas');
+            const context = canvas.getContext('2d');
+
+            // Dibujar el video en el canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convertir el canvas a una imagen en base64
+            const photoData = canvas.toDataURL('image/jpeg');
+            document.getElementById('photo-input').value = photoData;
+
+            // Mostrar la imagen capturada
+            const capturedPhoto = document.getElementById('captured-photo');
+            capturedPhoto.src = photoData;
+            capturedPhoto.style.display = 'block';
+
+            // Mostrar el formulario para guardar la foto
+            document.getElementById('photo-form').style.display = 'block';
+        });
+    </script>
+<script src="{% static 'Cursos/js/bootstrap.min.js' %}"></script>
+</html>
